@@ -5,7 +5,18 @@ const PORT = 3000;
 
 app.use(Express.json());
 
-const ads = [
+type Ad = {
+	id: number;
+	title: string;
+	description: string;
+	owner: string;
+	price: number;
+	picture: string;
+	location: string;
+	createdAt: string;
+};
+
+const ads: Ad[] = [
 	{
 		id: 1,
 		title: "Bike to sell",
