@@ -1,1 +1,10 @@
 GET http://localhost:3000/ads
+
+### 
+
+POST http://localhost:3000/ads
+Content-Type: application/json
+
+{
+  "title": "Un autre test, mdr"
+}
