@@ -86,6 +86,17 @@ app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
 	);
 });
 
+app.delete("/ads/:id/delete", (req: Express.Request, res: Express.Response) => {
+	const adId = Number(req.params.id);
+	db.run("DELETE FROM ads WHERE id = ?", adId, (err) => {
+		if (err) {
+			console.log(err);
+			return res.status(500).send(err);
+		}
+		return res.status(204).send();
+	});
+});
+
 app.listen(PORT, () => {
 	console.log(`App listening on: http://localhost:${PORT}`);
 });
