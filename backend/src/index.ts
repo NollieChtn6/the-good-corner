@@ -33,6 +33,20 @@ app.get("/ads", (req: Express.Request, res: Express.Response) => {
 	});
 });
 
+app.get("/ads/:id", (req: Express.Request, res: Express.Response) => {
+	const adId = Number(req.params.id);
+	db.all("SELECT * FROM ads WHERE id = ?", adId, (err, rows) => {
+		if (err) {
+			console.log(err);
+			return res.status(500).send(err);
+		}
+		if (!rows) {
+			return res.status(404).send(err);
+		}
+		return res.json(rows);
+	});
+});
+
 app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
 	const { title, description, owner, price, picture, location, createdAt } =
 		req.body as Ad;
