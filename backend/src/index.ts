@@ -55,7 +55,13 @@ app.get("/ads", (req: Express.Request, res: Express.Response) => {
 });
 
 app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
-	res.send("Request received, check the backend terminal");
+	db.run(
+		"INSERT INTO ads ('title', 'description', 'owner', 'price', 'createdAt', 'picture', 'location') VALUES ('randomObject', 'randomDescription', 'randomOwner', 42, '2024-09-25', 'https://imgur.com', 'Marseille')",
+		(err) => {
+			console.log(err);
+			res.send("Request received, check the backend terminal");
+		},
+	);
 });
 
 app.listen(PORT, () => {
