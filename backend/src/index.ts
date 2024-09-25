@@ -1,7 +1,10 @@
 import Express from "express";
+import sqlite3 from "sqlite3";
 
 const app = Express();
 const PORT = 3000;
+
+const db = new sqlite3.Database("db.sqlite");
 
 app.use(Express.json());
 
@@ -52,8 +55,6 @@ app.get("/ads", (req: Express.Request, res: Express.Response) => {
 });
 
 app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
-	console.log(req.body);
-	ads.push(req.body);
 	res.send("Request received, check the backend terminal");
 });
 
