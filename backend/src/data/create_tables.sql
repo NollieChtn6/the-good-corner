@@ -17,7 +17,7 @@ CREATE TABLE "ads"
   price INT,
   picture VARCHAR(100),
   location VARCHAR(100),
-  createdAt DATE
+  createdAt VARCHAR(25)
 );
 
 COMMIT;
