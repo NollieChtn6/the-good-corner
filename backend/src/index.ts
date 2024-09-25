@@ -55,9 +55,38 @@ app.get("/ads", (req: Express.Request, res: Express.Response) => {
 });
 
 app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
+	const { title, description, owner, price, picture, location, createdAt } =
+		req.body as Ad;
+
+	const newAd: Omit<Ad, "id"> = {
+		title,
+		description,
+		owner,
+		price,
+		picture,
+		location,
+		createdAt,
+	};
+
 	db.run(
-		"INSERT INTO ads ('title', 'description', 'owner', 'price', 'createdAt', 'picture', 'location') VALUES ('randomObject', 'randomDescription', 'randomOwner', 42, '2024-09-25', 'https://imgur.com', 'Marseille')",
+		// sql
+		"INSERT INTO ads ('title', 'description', 'owner', 'price', 'picture', 'location', 'createdAt') VALUES (?, ?, ?, ?, ?, ?, ?)",
+		// parameter
+		[
+			req.body.title,
+			req.body.description,
+			req.body.owner,
+			req.body.price,
+			req.body.picture,
+			req.body.location,
+			req.body.createdAt,
+		],
+		// callback
 		(err) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).send(err);
+			}
 			console.log(err);
 			res.send("Request received, check the backend terminal");
 		},
