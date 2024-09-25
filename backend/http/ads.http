@@ -1,10 +1,26 @@
 GET http://localhost:3000/ads
 
-### 
+###
 
-POST http://localhost:3000/ads
+GET http://localhost:3000/ads/19
+
+###
+
+POST http://localhost:3000/ads/create
 Content-Type: application/json
 
-{
-  "title": "Un autre test, mdr"
+  {
+    "title": "Ordinateur portable MacBook Air",
+    "description": "MacBook Air M1, 256 Go SSD, 8 Go RAM, excellent état.",
+    "owner": "Lulu Pâtisson",
+    "price": 950,
+    "picture": "https://example.com/images/macbook_air.jpg",
+    "location": "Paris",
+    "createdAt": "2023-05-06"
 }
+
+###
+
+DELETE  http://localhost:3000/ads/21/delete
+
+###
