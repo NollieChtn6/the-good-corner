@@ -1,5 +1,7 @@
 import Express from "express";
 import sqlite3 from "sqlite3";
+import "reflect-metadata";
+import { dataSource } from "./config/db";
 
 const app = Express();
 const PORT = 3000;
@@ -97,6 +99,7 @@ app.delete("/ads/:id/delete", (req: Express.Request, res: Express.Response) => {
 	});
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+	await dataSource.initialize();
 	console.log(`App listening on: http://localhost:${PORT}`);
 });
