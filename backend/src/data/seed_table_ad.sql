@@ -2,7 +2,7 @@
 
 BEGIN;
 
-INSERT INTO "ads" ("title", "description", "owner", "price", "picture", "location", "createdAt") VALUES
+INSERT INTO "ad" ("title", "description", "owner", "price", "picture", "location", "createdAt") VALUES
 ("Vélo de route", "Vélo de route en excellent état, peu utilisé, taille M.", "Alice Dupont", 350, "https://example.com/images/velo_1.jpg", "Paris", "2024-09-23"),
 ("Table basse en bois", "Table basse en bois massif, 100x50 cm, idéale pour salon.", "Marc Legrand", 120, "https://example.com/images/table_basse.jpg", "Lyon", "2024-09-23"),
 ("iPhone 12", "iPhone 12 en très bon état, 128 Go, sans rayures, vendu avec sa boîte d'origine.", "Camille Martin", 650, "https://example.com/images/iphone_12.jpg", "Marseille", "2024-09-23"),
