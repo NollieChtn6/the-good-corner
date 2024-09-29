@@ -28,7 +28,7 @@ app.get("/ads", async (req: Express.Request, res: Express.Response) => {
 
 app.get("/categories", async (req: Express.Request, res: Express.Response) => {
 	try {
-		const categoriesList = await Ad.find();
+		const categoriesList = await Category.find();
 		if (!categoriesList.length) {
 			return res.status(404).send("Not found!");
 		}
