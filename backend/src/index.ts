@@ -99,7 +99,7 @@ app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 
 		const category = await Category.findOneBy({ id: categoryId });
 		if (category) {
-			newAd.category = categoryId;
+			newAd.category = category;
 		}
 		newAd.save();
 		res.status(201).send(newAd);
