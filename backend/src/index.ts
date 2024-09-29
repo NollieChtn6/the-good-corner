@@ -97,8 +97,8 @@ app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 		newAd.location = location;
 		newAd.createdAt = createdAt;
 
-		const category = Category.findOneBy({ id: categoryId });
-		if (await category) {
+		const category = await Category.findOneBy({ id: categoryId });
+		if (category) {
 			newAd.category = categoryId;
 		}
 		newAd.save();
