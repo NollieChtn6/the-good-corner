@@ -2,6 +2,7 @@ import Express from "express";
 import "reflect-metadata";
 import { dataSource } from "./config/db";
 import { Ad } from "./entities/Ad";
+import { Category } from "./entities/Category";
 
 const app = Express();
 const PORT = 3000;
@@ -19,6 +20,19 @@ app.get("/ads", async (req: Express.Request, res: Express.Response) => {
 			return res.status(404).send("Not found!");
 		}
 		res.send(adsList);
+	} catch (err) {
+		console.log(err);
+		res.status(500).send(err);
+	}
+});
+
+app.get("/categories", async (req: Express.Request, res: Express.Response) => {
+	try {
+		const categoriesList = await Ad.find();
+		if (!categoriesList.length) {
+			return res.status(404).send("Not found!");
+		}
+		res.json(categoriesList);
 	} catch (err) {
 		console.log(err);
 		res.status(500).send(err);
