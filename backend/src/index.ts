@@ -40,9 +40,9 @@ app.get("/categories", async (req: Express.Request, res: Express.Response) => {
 });
 
 app.get("/ads/:id", async (req: Express.Request, res: Express.Response) => {
-	const id: number = Number(req.params.id);
+	const adId: number = Number(req.params.id);
 	try {
-		const selectedAd = await Ad.findOneBy({ id });
+		const selectedAd = await Ad.findOneBy({ id: adId });
 		if (!selectedAd) return res.status(404).send("No ad found!");
 		return res.json(selectedAd);
 	} catch (err) {
@@ -112,9 +112,9 @@ app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 app.delete(
 	"/ads/:id/delete",
 	async (req: Express.Request, res: Express.Response) => {
-		const id: number = Number(req.params.id);
+		const adId: number = Number(req.params.id);
 		try {
-			const selectedAd = await Ad.findOneBy({ id });
+			const selectedAd = await Ad.findOneBy({ id: adId });
 			if (!selectedAd) return res.status(404).send("No ad found!");
 			selectedAd.remove();
 		} catch (err) {
