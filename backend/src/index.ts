@@ -50,9 +50,17 @@ app.get("/ads/:id", async (req: Express.Request, res: Express.Response) => {
 	}
 });
 
-app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
-	const { title, description, owner, price, picture, location, createdAt } =
-		req.body;
+app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
+	const {
+		title,
+		description,
+		owner,
+		price,
+		picture,
+		location,
+		createdAt,
+		categoryId,
+	} = req.body;
 	try {
 		const newAd = new Ad();
 		newAd.title = title;
@@ -63,6 +71,10 @@ app.post("/ads/create", (req: Express.Request, res: Express.Response) => {
 		newAd.location = location;
 		newAd.createdAt = createdAt;
 
+		const category = Category.findOneBy({ id: categoryId });
+		if (await category) {
+			newAd.category = categoryId;
+		}
 		newAd.save();
 		res.status(201).send(newAd);
 	} catch (err) {
