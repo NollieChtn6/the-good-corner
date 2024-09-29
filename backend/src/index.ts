@@ -40,7 +40,7 @@ app.get("/categories", async (req: Express.Request, res: Express.Response) => {
 });
 
 app.get("/ads/:id", async (req: Express.Request, res: Express.Response) => {
-	const id = Number(req.params.id);
+	const id: number = Number(req.params.id);
 	try {
 		const selectedAd = await Ad.findOneBy({ id });
 		if (!selectedAd) return res.status(404).send("No ad found!");
@@ -53,7 +53,7 @@ app.get("/ads/:id", async (req: Express.Request, res: Express.Response) => {
 app.get(
 	"/categories/:id/ads",
 	async (req: Express.Request, res: Express.Response) => {
-		const categoryId = Number(req.params.id);
+		const categoryId: number = Number(req.params.id);
 		let whereClause = {};
 		if (categoryId)
 			whereClause = {
@@ -112,7 +112,7 @@ app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 app.delete(
 	"/ads/:id/delete",
 	async (req: Express.Request, res: Express.Response) => {
-		const id = Number(req.params.id);
+		const id: number = Number(req.params.id);
 		try {
 			const selectedAd = await Ad.findOneBy({ id });
 			if (!selectedAd) return res.status(404).send("No ad found!");
