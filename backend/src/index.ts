@@ -50,6 +50,32 @@ app.get("/ads/:id", async (req: Express.Request, res: Express.Response) => {
 	}
 });
 
+app.get(
+	"/categories/:id/ads",
+	async (req: Express.Request, res: Express.Response) => {
+		const categoryId = Number(req.params.id);
+		let whereClause = {};
+		if (categoryId)
+			whereClause = {
+				category: { id: categoryId },
+			};
+		try {
+			const adsByCategory = await Ad.find({
+				relations: {
+					category: true,
+				},
+				where: whereClause,
+			});
+			if (!adsByCategory.length) {
+				return res.status(404).send("Not found!");
+			}
+			return res.json(adsByCategory);
+		} catch (err) {
+			return res.status(500).send(err);
+		}
+	},
+);
+
 app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 	const {
 		title,
