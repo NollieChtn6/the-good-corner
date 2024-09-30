@@ -2,7 +2,7 @@ import "./App.css";
 
 function App() {
 	return (
-		<body>
+		<>
 			<header className="header">
 				<div className="main-menu">
 					<h1>
@@ -163,7 +163,7 @@ function App() {
 					</div>
 				</section>
 			</main>
-		</body>
+		</>
 	);
 }
 
