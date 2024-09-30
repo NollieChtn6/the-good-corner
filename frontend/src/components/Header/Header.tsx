@@ -1,6 +1,22 @@
 import "../../index.css";
 
 function Header() {
+	const categories: string[] = [
+		"Ameublement",
+		"Électroménager",
+		"Photographie",
+		"Informatique",
+		"Téléphonie",
+		"Vélos",
+		"Véhicules",
+		"Sport",
+		"Habillement",
+		"Bébé",
+		"Outillage",
+		"Services",
+		"Vacances",
+	];
+
 	return (
 		<>
 			<header className="header">
@@ -35,57 +51,14 @@ function Header() {
 					</a>
 				</div>
 				<nav className="categories-navigation">
-					<a href="url" className="category-navigation-link">
-						Ameublement
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Électroménager
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Photographie
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Informatique
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Téléphonie{" "}
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Vélos
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Véhicules
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Sport
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Habillement
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Bébé
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Outillage
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Services{" "}
-					</a>{" "}
-					•
-					<a href="url" className="category-navigation-link">
-						Vacances
-					</a>
+					{categories.map((category, id) => (
+						<>
+							{id > 0 && "•"}
+							<a href="url" className="category-navigation-link" key={category}>
+								{category}
+							</a>{" "}
+						</>
+					))}
 				</nav>
 			</header>
 		</>
