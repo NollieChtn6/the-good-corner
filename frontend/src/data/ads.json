@@ -1,0 +1,50 @@
+[
+	{
+		"id": 1,
+		"title": "Table",
+		"price": 120,
+		"img": "/images/table.webp",
+		"alt": "La fameuse table",
+		"link": "/ads/table"
+	},
+	{
+		"id": 2,
+		"title": "Dame-Jeanne",
+		"price": 75,
+		"img": "/images/dame-jeanne.webp",
+		"alt": "Dame-Jeanne",
+		"link": "/ads/table/dame-jeanne"
+	},
+	{
+		"id": 3,
+		"title": "Vide-poche",
+		"price": 4,
+		"img": "/images/vide-poche.webp",
+		"alt": "Le fameux vide-poches",
+		"link": "/ads/vide-poche"
+	},
+	{
+		"id": 4,
+		"title": "Vaisselier ancien",
+		"price": 0,
+		"img": "/images/vaisselier.webp",
+		"alt": "Le fameux vaisselier",
+		"link": "/ads/vaisselier"
+	},
+	{
+		"id": 5,
+		"title": "Bougie parfumée",
+		"price": 8,
+		"img": "/images/bougie.webp",
+		"alt": "La fameuse bougie",
+		"link": "/ads/bougie"
+	},
+	{
+		"id": 6,
+		"title": "Porte-magazine",
+		"price": 45,
+		"img": "/images/porte-magazine.webp",
+		"alt": "Le fameux porte-magazine",
+		"link": "/ads/porte-magazine"
+	}
+]
