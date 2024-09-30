@@ -26,7 +26,7 @@
 	{
 		"id": 4,
 		"title": "Vaisselier ancien",
-		"price": 0,
+		"price": 900,
 		"img": "/images/vaisselier.webp",
 		"alt": "Le fameux vaisselier",
 		"link": "/ads/vaisselier"
