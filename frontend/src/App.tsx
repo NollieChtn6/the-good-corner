@@ -1,17 +1,9 @@
-import Header from "./components/Header/Header";
-import LatestAds from "./components/LatestAds/LatestAds";
+import Layout from "./components/Layout/Layout";
 
 import "./App.css";
 
 function App() {
-	return (
-		<>
-			<Header />
-			<main className="main-content">
-				<LatestAds />
-			</main>
-		</>
-	);
+	return <Layout />;
 }
 
 export default App;
