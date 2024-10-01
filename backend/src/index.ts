@@ -3,10 +3,12 @@ import "reflect-metadata";
 import { dataSource } from "./config/db";
 import { Ad } from "./entities/Ad";
 import { Category } from "./entities/Category";
+import cors from "cors";
 
 const app = Express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(Express.json());
 
 app.get("/", (req: Express.Request, res: Express.Response) => {
