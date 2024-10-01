@@ -12,11 +12,22 @@ function LatestAds() {
 		setCartTotal(cartTotal + price);
 	};
 
+	const handleResetCart = () => {
+		setCartTotal(0);
+	};
+
 	return (
 		<>
 			<h2>Annonces récentes</h2>
 			<p>Total du panier&nbsp;: {cartTotal}&nbsp;€</p>
-
+			<button
+				type="button"
+				key=""
+				className=""
+				onClick={() => handleResetCart()}
+			>
+				Vider le panier
+			</button>
 			<section className="recent-ads">
 				{ads.map((ad) => (
 					<div key={ad.title}>
