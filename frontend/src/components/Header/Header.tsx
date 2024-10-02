@@ -1,23 +1,11 @@
 import "../../index.css";
 
 import { NavLink } from "react-router-dom";
+import { store } from "../../store/storeIndex";
 
 function Header() {
-	const categories: string[] = [
-		"Ameublement",
-		"Électroménager",
-		"Photographie",
-		"Informatique",
-		"Téléphonie",
-		"Vélos",
-		"Véhicules",
-		"Sport",
-		"Habillement",
-		"Bébé",
-		"Outillage",
-		"Services",
-		"Vacances",
-	];
+	const categories = store.categoriesStore((state) => state.categories);
+	console.log(categories);
 
 	return (
 		<>
@@ -59,9 +47,9 @@ function Header() {
 							<NavLink
 								to="url"
 								className="category-navigation-link"
-								key={category}
+								key={category.id}
 							>
-								{category}
+								{category.name}
 							</NavLink>{" "}
 						</>
 					))}
