@@ -1,6 +1,16 @@
 import type { FormEvent } from "react";
+import axios from "axios";
+
+import type { Category } from "../../@types/types";
 
 function NewAdForm() {
+	const fetchCategories = async () => {
+		const response = await axios.get<Category[]>(
+			"http://localhost:3000/categories",
+		);
+		console.log("Categories", response.data);
+	};
+	fetchCategories();
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.target;
