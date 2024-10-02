@@ -11,5 +11,4 @@ export type Ad = {
 export type Category = {
 	id: number;
 	name: string;
-	ads: Ad[];
 };
