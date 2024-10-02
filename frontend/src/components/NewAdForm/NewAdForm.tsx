@@ -5,6 +5,11 @@ import type { Category } from "../../@types/types";
 
 function NewAdForm() {
 	const [categories, setCategories] = useState<Category[]>([]);
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0);
+
+	const handleCategorySelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setSelectedCategoryId(Number(e.target.value));
+	};
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -20,7 +25,17 @@ function NewAdForm() {
 		e.preventDefault();
 		const form = e.target;
 		const formData = new FormData(form as HTMLFormElement);
-		console.log(formData);
+
+		const date = new Date().toISOString();
+		console.log("Submission date:", date);
+		formData.append("createdAt", date);
+
+		const formJson = Object.fromEntries(formData.entries());
+
+		console.log("Selected category:", selectedCategoryId);
+		console.log(formJson);
+		setSelectedCategoryId(0);
+		console.log(selectedCategoryId);
 	};
 
 	return (
@@ -32,21 +47,51 @@ function NewAdForm() {
 			</label>
 			<br />
 			<label>
-				Prix de vente&nbsp;:
+				Description de l&rsquo;objet&nbsp;:
 				<br />
-				<input className="text-field" name="price" />
+				<input className="text-field" type="text" name="price" />
 			</label>
 			<br />
-			<select name="category">
-				<option disabled selected>
-					Choisir...
-				</option>
-				{categories.map((category) => (
-					<option value={category.id} key={category.id}>
-						{category.name}
-					</option>
-				))}
-			</select>
+			<label>
+				Prix de vente&nbsp;:
+				<br />
+				<input className="text-field" type="number" name="price" />
+			</label>
+			<br />
+			<label>
+				Catégorie&nbsp;:
+				<br />
+				<select
+					name="category"
+					onChange={handleCategorySelection}
+					value={selectedCategoryId}
+				>
+					<option disabled>Choisir...</option>
+					{categories.map((category) => (
+						<option value={category.id} key={category.id}>
+							{category.name}
+						</option>
+					))}
+				</select>
+			</label>
+			<br />
+			<label>
+				Pseudo&nbsp;:
+				<br />
+				<input className="text-field" name="owner" />
+			</label>
+			<br />
+			<label>
+				Ville&nbsp;:
+				<br />
+				<input className="text-field" name="location" />
+			</label>
+			<br />
+			<label>
+				Url de votre image&nbsp;:
+				<br />
+				<input className="text-field" name="picture" />
+			</label>
 			<button className="button" type="submit">
 				Créer
 			</button>
