@@ -1,5 +1,7 @@
 import "../../index.css";
 
+import { NavLink } from "react-router-dom";
+
 function Header() {
 	const categories: string[] = [
 		"Ameublement",
@@ -45,18 +47,22 @@ function Header() {
 							</svg>
 						</button>
 					</form>
-					<a href="/ads/create" className="button link-button">
+					<NavLink to="/ads/create" className="button link-button">
 						<span className="mobile-short-label">Publier</span>
 						<span className="desktop-long-label">Publier une annonce</span>
-					</a>
+					</NavLink>
 				</div>
 				<nav className="categories-navigation">
 					{categories.map((category, id) => (
 						<>
 							{id > 0 && "•"}
-							<a href="url" className="category-navigation-link" key={category}>
+							<NavLink
+								to="url"
+								className="category-navigation-link"
+								key={category}
+							>
 								{category}
-							</a>{" "}
+							</NavLink>{" "}
 						</>
 					))}
 				</nav>
