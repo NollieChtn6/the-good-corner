@@ -1,13 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdCard from "../AdCard/AdCard";
 import "../../index.css";
 
-import type { Ad } from "../../@types/types";
+import { store } from "../../store/storeIndex";
 
 function LatestAds() {
 	const [cartTotal, setCartTotal] = useState<number>(0);
-	const [ads, setAds] = useState<Ad[]>([]);
+	const ads = store.adsStore((state) => state.ads);
+	console.log(ads);
 
 	const handleAddToCart = (price: number) => {
 		setCartTotal(cartTotal + price);
@@ -16,19 +16,6 @@ function LatestAds() {
 	const handleResetCart = () => {
 		setCartTotal(0);
 	};
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get<Ad[]>("http://localhost:3000/ads");
-				console.log("Ads:", response.data);
-				setAds(response.data);
-			} catch (error) {
-				console.log("Error:", error);
-			}
-		};
-		fetchData();
-	}, []);
 
 	return (
 		<>
