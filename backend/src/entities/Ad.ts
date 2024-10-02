@@ -19,13 +19,13 @@ export class Ad extends BaseEntity {
 	description?: string;
 
 	@Column()
-	owner!: string;
+	owner?: string;
 
 	@Column()
-	price!: number;
+	price?: number;
 
 	@Column()
-	picture!: string;
+	picture?: string;
 
 	@Column()
 	location!: string;
@@ -35,7 +35,7 @@ export class Ad extends BaseEntity {
 
 	@ManyToOne(
 		() => Category,
-		(category) => category,
+		(category) => category.ads,
 	)
 	category!: Category;
 }
