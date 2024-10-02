@@ -21,7 +21,7 @@ function NewAdForm() {
 		fetchCategories();
 	}, []);
 
-	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.target;
 		const formData = new FormData(form as HTMLFormElement);
@@ -31,11 +31,7 @@ function NewAdForm() {
 		formData.append("createdAt", date);
 
 		const formJson = Object.fromEntries(formData.entries());
-
-		console.log("Selected category:", selectedCategoryId);
 		console.log(formJson);
-		setSelectedCategoryId(0);
-		console.log(selectedCategoryId);
 	};
 
 	return (
@@ -49,7 +45,7 @@ function NewAdForm() {
 			<label>
 				Description de l&rsquo;objet&nbsp;:
 				<br />
-				<input className="text-field" type="text" name="price" />
+				<input className="text-field" type="text" name="description" />
 			</label>
 			<br />
 			<label>
@@ -76,7 +72,7 @@ function NewAdForm() {
 			</label>
 			<br />
 			<label>
-				Pseudo&nbsp;:
+				Nom&nbsp;:
 				<br />
 				<input className="text-field" name="owner" />
 			</label>
