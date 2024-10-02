@@ -12,6 +12,13 @@ INSERT INTO "category" (name) VALUES
 ("Jouets"),
 ("Mode"),
 ("Informatique"),
-("Sport");
+("Sport"),
+("Immobilier"),
+("Animaux"),
+("Instruments de musique"),
+("Livres"),
+("Jeux vidéo"),
+("Bricolage"),
+("Multimédia"); 
 
 COMMIT;
