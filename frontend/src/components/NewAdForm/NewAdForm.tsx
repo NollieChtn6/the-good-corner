@@ -31,7 +31,15 @@ function NewAdForm() {
 		formData.append("createdAt", date);
 
 		const formJson = Object.fromEntries(formData.entries());
-		console.log(formJson);
+		try {
+			const response = await axios.post(
+				"http://localhost:3000/ads/create",
+				formJson,
+			);
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
