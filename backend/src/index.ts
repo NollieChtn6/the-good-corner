@@ -89,6 +89,7 @@ app.post("/ads/create", async (req: Express.Request, res: Express.Response) => {
 		createdAt,
 		categoryId,
 	} = req.body;
+	console.log("Req body:", req.body);
 	try {
 		const newAd = new Ad();
 		newAd.title = title;
