@@ -4,6 +4,7 @@ import App from "../App";
 import LatestAds from "../components/LatestAds/LatestAds";
 import About from "../components/About/About";
 import AdDetails from "../components/AdDetails/AdDetails";
+import NewAdForm from "../components/NewAdForm/NewAdForm";
 
 const router = createBrowserRouter([
 	{
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
 			{
 				path: "/ads/:id",
 				element: <AdDetails />,
+			},
+			{
+				path: "/ads/create",
+				element: <NewAdForm />,
 			},
 			{
 				path: "/about",
