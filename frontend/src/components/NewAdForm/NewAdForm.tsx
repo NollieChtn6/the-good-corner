@@ -1,16 +1,21 @@
-import type { FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import axios from "axios";
 
 import type { Category } from "../../@types/types";
 
 function NewAdForm() {
-	const fetchCategories = async () => {
-		const response = await axios.get<Category[]>(
-			"http://localhost:3000/categories",
-		);
-		console.log("Categories", response.data);
-	};
-	fetchCategories();
+	const [categories, setCategories] = useState<Category[]>([]);
+
+	useEffect(() => {
+		const fetchCategories = async () => {
+			const response = await axios.get<Category[]>(
+				"http://localhost:3000/categories",
+			);
+			setCategories(response.data);
+		};
+		fetchCategories();
+	}, []);
+
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.target;
@@ -31,6 +36,17 @@ function NewAdForm() {
 				<br />
 				<input className="text-field" name="price" />
 			</label>
+			<br />
+			<select name="category">
+				<option disabled selected>
+					Choisir...
+				</option>
+				{categories.map((category) => (
+					<option value={category.id} key={category.id}>
+						{category.name}
+					</option>
+				))}
+			</select>
 			<button className="button" type="submit">
 				Créer
 			</button>
