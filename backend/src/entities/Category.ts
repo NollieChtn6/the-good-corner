@@ -5,10 +5,10 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Ad } from "./Ad";
+import { AdEntity } from "./Ad";
 
-@Entity()
-export class Category extends BaseEntity {
+@Entity({ name: "category" })
+export class CategoryEntity extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
@@ -16,8 +16,8 @@ export class Category extends BaseEntity {
 	name!: string;
 
 	@OneToMany(
-		() => Ad,
+		() => AdEntity,
 		(ad) => ad.category,
 	)
-	ads!: Ad[];
+	ads!: AdEntity[];
 }
