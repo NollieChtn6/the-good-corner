@@ -19,6 +19,9 @@ INSERT INTO "category" (name) VALUES
 ("Livres"),
 ("Jeux vidéo"),
 ("Bricolage"),
-("Multimédia"); 
+("Multimédia"),
+("Accessoires"),               
+("Bureau"),
+("Papeterie");  
 
 COMMIT;
