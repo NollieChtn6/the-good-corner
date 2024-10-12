@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
-import Layout from "./components/Layout/Layout";
+import Layout from "./pages/Layout";
 import { store } from "./store/storeIndex";
 
 import "./App.css";
+import "./index.css";
 
 function App() {
 	const fetchAds = store.adsStore((state) => state.fetchAds);

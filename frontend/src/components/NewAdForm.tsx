@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import axios from "axios";
 
-import type { Category } from "../../@types/types";
+import type { Category } from "../@types/types";
 
 function NewAdForm() {
 	const [categories, setCategories] = useState<Category[]>([]);

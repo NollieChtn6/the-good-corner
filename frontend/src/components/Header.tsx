@@ -1,7 +1,5 @@
-import "../../index.css";
-
 import { NavLink } from "react-router-dom";
-import { store } from "../../store/storeIndex";
+import { store } from "../store/storeIndex";
 
 function Header() {
 	const categories = store.categoriesStore((state) => state.categories);

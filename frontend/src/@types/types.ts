@@ -4,11 +4,19 @@ export type Ad = {
 	description: string;
 	owner: string;
 	price: number;
-	picture: string;
+	pictureUrl: string;
 	category: Category;
+	createdAt: Date;
+	updatedAt: Date | null;
+	tags: Tag[] | [];
 };
 
 export type Category = {
 	id: number;
 	name: string;
+};
+
+export type Tag = {
+	id: number;
+	label: string;
 };

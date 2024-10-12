@@ -12,7 +12,7 @@ export const useCategoriesStore = create<CategoriesStore>((set) => ({
 	categories: [],
 	fetchCategories: async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/categories");
+			const response = await axios.get("http://localhost:3000/api/categories");
 			if (response.status === 200 && response.data) {
 				set({ categories: response.data });
 				console.log(response.data);

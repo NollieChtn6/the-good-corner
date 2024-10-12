@@ -1,19 +1,17 @@
-import "../../index.css";
-
 type AdCardProps = {
 	id: number;
 	title: string;
 	price: number;
-	picture: string;
+	pictureUrl: string;
 };
 
-function AdCard({ id, title, price, picture }: AdCardProps) {
+function AdCard({ id, title, price, pictureUrl }: AdCardProps) {
 	return (
 		<div className="ad-card-container">
 			<a className="ad-card-link" href={`/ads/${id}`} id={`object_${id}`}>
 				<img
 					className="ad-card-image"
-					src={picture}
+					src={pictureUrl}
 					alt={`Une représentation visuelle de ${title}`}
 				/>
 				<div className="ad-card-text">

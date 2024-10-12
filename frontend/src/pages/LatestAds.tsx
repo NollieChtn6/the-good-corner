@@ -1,8 +1,7 @@
 import { useState } from "react";
-import AdCard from "../AdCard/AdCard";
-import "../../index.css";
+import AdCard from "../components/AdCard";
 
-import { store } from "../../store/storeIndex";
+import { store } from "../store/storeIndex";
 
 function LatestAds() {
 	const [cartTotal, setCartTotal] = useState<number>(0);
@@ -36,7 +35,7 @@ function LatestAds() {
 							id={ad.id}
 							title={ad.title}
 							price={ad.price}
-							picture={ad.picture}
+							pictureUrl={ad.pictureUrl}
 							key={ad.id}
 						/>
 						<button

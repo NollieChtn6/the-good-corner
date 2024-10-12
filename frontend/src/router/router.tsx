@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "../App";
-import LatestAds from "../components/LatestAds/LatestAds";
-import AdDetails from "../components/AdDetails/AdDetails";
-import NewAdForm from "../components/NewAdForm/NewAdForm";
+import LatestAds from "../pages/LatestAds";
+import AdDetails from "../pages/AdDetails";
+import NewAdForm from "../components/NewAdForm";
 
 const router = createBrowserRouter([
 	{

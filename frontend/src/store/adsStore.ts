@@ -12,7 +12,7 @@ export const useAdsStore = create<AdsStore>((set) => ({
 	ads: [],
 	fetchAds: async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/ads");
+			const response = await axios.get("http://localhost:3000/api/ads");
 			if (response.status === 200 && response.data) {
 				set({ ads: response.data });
 				console.log(response.data);
