@@ -1,12 +1,13 @@
 import { DataSource } from "typeorm";
-import { Ad } from "../entities/Ad";
-import { Category } from "../entities/Category";
+import { AdEntity } from "../entities/Ad";
+import { CategoryEntity } from "../entities/Category";
+import { TagEntity } from "../entities/Tag";
 
 export const dataSource = new DataSource({
 	type: "sqlite",
 	database: "./the-good-corner.sqlite",
-	entities: [Ad, Category],
-	synchronize: false,
-	migrations: ["./src/migrations/*.ts"],
-	migrationsTableName: "migrations",
+	entities: [AdEntity, CategoryEntity, TagEntity],
+	synchronize: true,
+	// migrations: ["./src/migrations/*.ts"],
+	// migrationsTableName: "migrations",
 });
