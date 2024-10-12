@@ -3,12 +3,16 @@ import {
 	Column,
 	Entity,
 	ManyToOne,
+	ManyToMany,
+	JoinTable,
+	JoinColumn,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Category } from "./Category";
+import { CategoryEntity } from "./Category";
+import { TagEntity } from "./Tag";
 
-@Entity()
-export class Ad extends BaseEntity {
+@Entity({ name: "ad" })
+export class AdEntity extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
@@ -16,26 +20,49 @@ export class Ad extends BaseEntity {
 	title!: string;
 
 	@Column()
-	description?: string;
+	description!: string;
 
 	@Column()
-	owner?: string;
+	owner!: string;
 
 	@Column()
-	price?: number;
+	price!: number;
 
 	@Column()
-	picture?: string;
+	pictureUrl?: string;
 
 	@Column()
 	location!: string;
 
-	@Column()
-	createdAt!: string;
+	@Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
+	createdAt: Date = new Date();
+
+	@Column({ type: "datetime", nullable: true })
+	updatedAt?: Date;
 
 	@ManyToOne(
-		() => Category,
+		() => CategoryEntity,
 		(category) => category.ads,
 	)
-	category!: Category;
+	@JoinColumn({ name: "category" })
+	category!: CategoryEntity;
+
+	@ManyToOne(
+		() => CategoryEntity,
+		(category) => category.ads,
+	)
+
+	@ManyToMany(() => TagEntity, { cascade: true })
+	@JoinTable({
+		name: "ad_has_tags",
+		joinColumn: {
+			name: "adId",
+			referencedColumnName: "id",
+		},
+		inverseJoinColumn: {
+			name: "tagId",
+			referencedColumnName: "id",
+		},
+	})
+	tags?: TagEntity[];
 }
