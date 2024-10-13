@@ -40,8 +40,10 @@ export const createAd = async (ad: NewAdData): Promise<AdEntity> => {
 	newAd.category = selectedCategory;
 
 	if (ad.tags && ad.tags.length > 0) {
-		const selectedTags = ad.tags.map((tag) => tag.id);
-		const tags = await TagEntity.findBy({ id: In(selectedTags) });
+		const tags = await TagEntity.findBy({ id: In(ad.tags) });
+		if (!tags || tags.length !== ad.tags.length) {
+			throw new Error("One or more tags not found");
+		}
 		newAd.tags = tags;
 	}
 	return await newAd.save();
@@ -84,9 +86,13 @@ export const updateAd = async (
 	}
 
 	if (data.tags && data.tags.length > 0) {
-		const selectedTags = data.tags.map((tag) => tag.id);
-		const tags = await TagEntity.findBy({ id: In(selectedTags) });
+		const tags = await TagEntity.findBy({ id: In(data.tags) });
+		if (tags.length !== data.tags.length) {
+			throw new Error("One or more tags not found");
+		}
 		selectedAd.tags = tags;
+	} else {
+		selectedAd.tags = [];
 	}
 	return await AdEntity.save(selectedAd);
 };
