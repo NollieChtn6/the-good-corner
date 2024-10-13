@@ -11,14 +11,16 @@ function App() {
 	const fetchCategories = store.categoriesStore(
 		(state) => state.fetchCategories,
 	);
+	const fetchTags = store.tagsStore((state) => state.fetchTags);
 
 	useEffect(() => {
 		const loadData = async () => {
 			await fetchAds();
 			await fetchCategories();
+			await fetchTags();
 		};
 		loadData();
-	}, [fetchAds, fetchCategories]);
+	}, [fetchAds, fetchCategories, fetchTags]);
 
 	return <Layout />;
 }
