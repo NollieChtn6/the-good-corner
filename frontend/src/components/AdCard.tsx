@@ -1,24 +1,36 @@
+import { Link } from "react-router-dom";
+import { MapPin } from "lucide-react";
+
 type AdCardProps = {
 	id: number;
 	title: string;
 	price: number;
 	pictureUrl: string;
+	location: string;
 };
 
-function AdCard({ id, title, price, pictureUrl }: AdCardProps) {
+function AdCard({ id, title, price, pictureUrl, location }: AdCardProps) {
 	return (
 		<div className="ad-card-container">
-			<a className="ad-card-link" href={`/ads/${id}`} id={`object_${id}`}>
+			<div className="ad-card-content">
 				<img
 					className="ad-card-image"
 					src={pictureUrl}
 					alt={`Une représentation visuelle de ${title}`}
 				/>
-				<div className="ad-card-text">
-					<div className="ad-card-title">{title}</div>
-					<div className="ad-card-price">{price}&nbsp;€</div>
-				</div>
-			</a>
+				<footer className="ad-card-footer">
+					<div className="ad-card-title-price">
+						<Link to={`/annonces/${id}`} className="ad-card-title">
+							{title}
+						</Link>
+						<div className="ad-card-price">{price}&nbsp;€</div>
+					</div>
+					<div className="ad-card-location">
+						<MapPin size={16} className="icon location-icon" />
+						<span>{location}</span>
+					</div>
+				</footer>
+			</div>
 		</div>
 	);
 }
