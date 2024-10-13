@@ -6,6 +6,7 @@ export type Ad = {
 	price: number;
 	pictureUrl: string;
 	category: Category;
+	location: string;
 	createdAt: Date;
 	updatedAt: Date | null;
 	tags: Tag[] | [];
