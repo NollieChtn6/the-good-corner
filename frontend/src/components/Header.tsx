@@ -33,7 +33,10 @@ function Header() {
 							</svg>
 						</button>
 					</form>
-					<NavLink to="/ads/create" className="button link-button">
+					<NavLink
+						to="/annonces/nouvelle-annonce"
+						className="button link-button"
+					>
 						<span className="mobile-short-label">Publier</span>
 						<span className="desktop-long-label">Publier une annonce</span>
 					</NavLink>
