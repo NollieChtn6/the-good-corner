@@ -11,6 +11,7 @@ body {
 
 h1 {
 	margin: 0;
+	font-size: 2rem;
 }
 
 .header {
@@ -21,6 +22,7 @@ h1 {
 	border-bottom: 1px solid lightgray;
 	padding: 10px;
 	background-color: white;
+	z-index: 1000;
 }
 
 .main-menu {
@@ -46,20 +48,38 @@ h1 {
 }
 
 .button {
-	min-width: 40px;
+	min-width: 100px;
 	height: 40px;
-	padding: 8px;
+	padding: 8px 16px;
 	border-radius: 8px;
 	border: 2px solid #ffa41b;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 3px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	color: #ffa41b;
 	background-color: white;
 	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+	background-color: #ffa41b;
+	color: white;
+}
+
+.button-primary {
+	background-color: #ffa41b;
+	color: white;
+	border-color: #ffa41b;
+	text-decoration: none;
+}
+
+.button-primary:hover {
+	background-color: white;
+	color: #ffa41b;
+	border-color: #ffa41b;
 }
 
 .logo {
@@ -111,8 +131,27 @@ h1 {
 
 .recent-ads {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	gap: 16px;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin-bottom: 32px;
+}
+
+.ad-card-container {
+	border-radius: 8px;
+	border: 1px solid lightgray;
+	color: inherit;
+	background-color: white;
+	transition: box-shadow 0.3s ease;
+}
+
+.ad-card-container:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.view-more-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 24px;
 }
 
 .ad-card-container {
@@ -196,4 +235,175 @@ h1 {
 	height: 1px;
 	background-color: lightgray;
 	border: none;
+}
+
+.ad-card-container {
+	border-radius: 8px;
+	border: 1px solid lightgray;
+	color: inherit;
+	background-color: white;
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	width: 300px;
+}
+
+.ad-card-container:hover {
+	transform: translateY(-5px);
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ad-card-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.ad-card-image {
+	width: 100%;
+	border-radius: 8px 8px 0 0;
+	object-fit: cover;
+}
+
+.ad-card-footer {
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.ad-card-title {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ad-card-title-price {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ad-card-location {
+	color: gray;
+	font-size: 14px;
+	margin-top: 4px;
+}
+
+.ad-card-price {
+	font-weight: bold;
+	color: #ffa41b;
+}
+
+.icon {
+	margin-right: 4px;
+}
+
+.ad-details {
+	display: flex;
+	flex-direction: column;
+	max-width: 600px;
+	height: auto;
+	margin: 80px auto;
+	padding: 16px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ad-details-meta {
+	display: flex;
+	flex-direction: column;
+	margin: 16px 0;
+	font-size: 14px;
+	color: #666;
+}
+
+.ad-details-image {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.ad-details-price {
+	font-weight: bold;
+	font-size: 24px;
+	margin: 16px 0;
+}
+
+.tags-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	margin: 16px 0;
+}
+
+.tag-checkbox {
+	margin-right: 15px;
+	margin-bottom: 10px;
+}
+
+.tag-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffa41b;
+	color: white;
+	border-radius: 4px;
+	padding: 4px 8px;
+	font-size: 12px;
+	width: 100px;
+	height: 30px;
+}
+
+.ad-details-actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 24px;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 600px;
+	margin: auto;
+	padding: 20px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+.text-field,
+.select-field {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	border: 2px solid #ffa41b;
+	border-radius: 8px;
+	font-size: 16px;
+}
+
+.create-ad-btn {
+	width: 40%;
+	padding: 10px;
+	margin: auto;
+	background-color: #ffa41b;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.create-ad-bt:hover {
+	background-color: #e68a00;
 }
