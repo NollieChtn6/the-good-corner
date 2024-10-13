@@ -4,7 +4,7 @@ import { store } from "../store/storeIndex";
 
 function LatestAds() {
 	const ads = store.adsStore((state) => state.ads);
-	const latestAds = ads.slice(Math.max(ads.length - 9, 0));
+	const latestAds = ads.slice(Math.max(ads.length - 9, 0)).reverse();
 
 	return (
 		<>
