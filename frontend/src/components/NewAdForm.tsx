@@ -1,105 +1,189 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import axios from "axios";
+import { store } from "../store/storeIndex";
 
-import type { Category } from "../@types/types";
+export type NewAdProps = {
+	title: string;
+	description: string;
+	owner: string;
+	price: number;
+	pictureUrl: string;
+	location: string;
+	category: number;
+	tags: number[];
+};
 
 function NewAdForm() {
-	const [categories, setCategories] = useState<Category[]>([]);
-	const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0);
+	const tags = store.tagsStore((state) => state.tags);
+	const categories = store.categoriesStore((state) => state.categories);
 
-	const handleCategorySelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setSelectedCategoryId(Number(e.target.value));
+	const [formData, setFormData] = useState<NewAdProps>({
+		title: "",
+		description: "",
+		owner: "",
+		price: 0,
+		pictureUrl: "",
+		location: "",
+		category: 0,
+		tags: [],
+	});
+
+	const handleInputChange = (
+		field: keyof NewAdProps,
+		value: string | number | number[],
+	) => {
+		setFormData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
 	};
 
-	useEffect(() => {
-		const fetchCategories = async () => {
-			const response = await axios.get<Category[]>(
-				"http://localhost:3000/categories",
-			);
-			setCategories(response.data);
-		};
-		fetchCategories();
-	}, []);
+	const handleTagsSelection = (tagId: number) => {
+		setFormData((prevData) => {
+			const tagExists = prevData.tags.includes(tagId);
+			const newTags = tagExists
+				? prevData.tags.filter((id) => id !== tagId)
+				: [...prevData.tags, tagId];
+			return {
+				...prevData,
+				tags: newTags,
+			};
+		});
+	};
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const form = e.target;
-		const formData = new FormData(form as HTMLFormElement);
-
-		const date = new Date().toISOString();
-		console.log("Submission date:", date);
-		formData.append("createdAt", date);
-
-		const formJson = Object.fromEntries(formData.entries());
+		console.log(formData);
 		try {
 			const response = await axios.post(
-				"http://localhost:3000/ads/create",
-				formJson,
+				"http://localhost:3000/api/ads/create",
+				formData,
 			);
 			console.log(response);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
 
 	return (
-		<form onSubmit={handleFormSubmit}>
-			<label>
-				Titre de l&rsquo;annonce&nbsp;:
+		<div className="form-container">
+			<h1>Ajouter une annonce</h1>
+			<form onSubmit={handleFormSubmit}>
+				<label>
+					Titre de l&rsquo;annonce&nbsp;:
+					<br />
+					<input
+						className="text-field"
+						name="title"
+						required
+						onChange={(e) => handleInputChange("title", e.target.value)}
+					/>
+				</label>
 				<br />
-				<input className="text-field" name="title" />
-			</label>
-			<br />
-			<label>
-				Description de l&rsquo;objet&nbsp;:
+				<label>
+					Description de l&rsquo;objet&nbsp;:
+					<br />
+					<textarea
+						className="text-field"
+						name="description"
+						rows={6}
+						cols={50}
+						required
+						onChange={(e) => handleInputChange("description", e.target.value)}
+					/>
+				</label>
 				<br />
-				<input className="text-field" type="text" name="description" />
-			</label>
-			<br />
-			<label>
-				Prix de vente&nbsp;:
+				<label>
+					Prix de vente&nbsp;:
+					<br />
+					<input
+						className="text-field"
+						type="number"
+						name="price"
+						required
+						onChange={(e) => handleInputChange("price", Number(e.target.value))}
+					/>
+				</label>
 				<br />
-				<input className="text-field" type="number" name="price" />
-			</label>
-			<br />
-			<label>
-				Catégorie&nbsp;:
-				<br />
-				<select
-					name="category"
-					onChange={handleCategorySelection}
-					value={selectedCategoryId}
-				>
-					<option disabled>Choisir...</option>
-					{categories.map((category) => (
-						<option value={category.id} key={category.id}>
-							{category.name}
+				<label>
+					Catégorie&nbsp;:
+					<br />
+					<select
+						name="category"
+						onChange={(e) =>
+							handleInputChange("category", Number(e.target.value))
+						}
+						value={formData.category}
+						className="select-field"
+					>
+						<option disabled value={0}>
+							Choisir...
 						</option>
-					))}
-				</select>
-			</label>
-			<br />
-			<label>
-				Nom&nbsp;:
+						{categories.map((category) => (
+							<option value={category.id} key={category.id}>
+								{category.name}
+							</option>
+						))}
+					</select>
+				</label>
 				<br />
-				<input className="text-field" name="owner" />
-			</label>
-			<br />
-			<label>
-				Ville&nbsp;:
+				<label htmlFor="">
+					Tags&nbsp;:
+					<br />
+					<div className="tags-container">
+						{tags.map((tag) => (
+							<div key={tag.id} className="tag-checkbox">
+								<input
+									type="checkbox"
+									id={`tag-${tag.id}`}
+									value={tag.id}
+									checked={formData.tags.includes(tag.id)}
+									onChange={() => handleTagsSelection(tag.id)}
+								/>
+								<label htmlFor={`tag-${tag.id}`}>{tag.label}</label>
+							</div>
+						))}
+					</div>
+				</label>
 				<br />
-				<input className="text-field" name="location" />
-			</label>
-			<br />
-			<label>
-				Url de votre image&nbsp;:
+				<label>
+					Votre nom&nbsp;:
+					<br />
+					<input
+						className="text-field"
+						name="owner"
+						required
+						onChange={(e) => handleInputChange("owner", e.target.value)}
+					/>
+				</label>
 				<br />
-				<input className="text-field" name="picture" />
-			</label>
-			<button className="button" type="submit">
-				Créer
-			</button>
-		</form>
+				<label>
+					Ville&nbsp;:
+					<br />
+					<input
+						className="text-field"
+						name="location"
+						required
+						onChange={(e) => handleInputChange("location", e.target.value)}
+					/>
+				</label>
+				<br />
+				<label>
+					Url de votre image&nbsp;:
+					<br />
+					<input
+						className="text-field"
+						name="pictureUrl"
+						required
+						onChange={(e) => handleInputChange("pictureUrl", e.target.value)}
+					/>
+				</label>
+				<br />
+				<button className="button" type="submit">
+					Créer
+				</button>
+			</form>
+		</div>
 	);
 }
 
