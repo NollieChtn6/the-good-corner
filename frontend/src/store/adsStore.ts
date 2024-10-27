@@ -1,24 +1,29 @@
-import axios from "axios";
 import { create } from "zustand";
 
-import type { Ad } from "../@types/types";
+import type { Ad, CreateAdFormData } from "../@types/types";
+
+import { fetchAds, createAd } from "../services/adsServices";
 
 type AdsStore = {
 	ads: Ad[];
 	fetchAds: () => Promise<void>;
+	createAd: (newAd: CreateAdFormData) => Promise<void>;
 };
 
 export const useAdsStore = create<AdsStore>((set) => ({
 	ads: [],
 	fetchAds: async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/ads");
-			if (response.status === 200 && response.data) {
-				set({ ads: response.data });
-				console.log(response.data);
-			} else {
-				throw new Error("Failed to fetch ads");
-			}
+			const adsData = await fetchAds();
+			set({ ads: adsData });
+		} catch (error) {
+			console.error(error);
+		}
+	},
+	createAd: async (newAdData) => {
+		try {
+			const newAd = await createAd(newAdData);
+			set((state) => ({ ads: [...state.ads, newAd] }));
 		} catch (error) {
 			console.error(error);
 		}
