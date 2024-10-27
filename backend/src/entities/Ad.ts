@@ -64,5 +64,5 @@ export class AdEntity extends BaseEntity {
 			referencedColumnName: "id",
 		},
 	})
-	tags?: TagEntity[];
+	tags!: TagEntity[];
 }
