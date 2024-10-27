@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import LatestAds from "../pages/LatestAds";
 import AdDetails from "../pages/AdDetails";
-// import NewAdForm from "../components/NewAdForm";
 import CreateNewAd from "../pages/CreateNewAd";
 import AllAds from "../pages/Ads";
 
