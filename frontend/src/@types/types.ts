@@ -21,3 +21,23 @@ export type Tag = {
 	id: number;
 	label: string;
 };
+
+export type CreateAdFormData = {
+	title: string;
+	description: string;
+	owner: string;
+	price: number;
+	pictureUrl: string;
+	location: string;
+	category: number | null;
+	tags: number[];
+};
+
+export type UpdateAdFormData = {
+	title: string;
+	description: string;
+	price: number;
+	pictureUrl: string;
+	category: number;
+	tags: number[];
+};
