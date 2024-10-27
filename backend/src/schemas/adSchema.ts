@@ -18,7 +18,7 @@ export const createAdSchema = z.object({
 		.number()
 		.int()
 		.positive({ message: "L'ID de la catégorie doit être un entier positif" }),
-	tags: z.array(z.number().int()).optional(),
+	tags: z.array(z.number().int()).default([]),
 });
 
 export type NewAdData = z.infer<typeof createAdSchema>;
@@ -39,7 +39,7 @@ export const updateAdSchema = z.object({
 		.number()
 		.int()
 		.positive({ message: "L'ID de la catégorie doit être un entier positif" }),
-	tags: z.array(z.number().int()).optional(),
+	tags: z.array(z.number().int()).default([]),
 });
 
 export type UpdatedAdData = z.infer<typeof updateAdSchema>;
