@@ -1,5 +1,5 @@
-import axios from "axios";
 import { create } from "zustand";
+import { fetchCategories } from "../services/categoriesServices";
 
 import type { Category } from "../@types/types";
 
@@ -12,13 +12,8 @@ export const useCategoriesStore = create<CategoriesStore>((set) => ({
 	categories: [],
 	fetchCategories: async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/categories");
-			if (response.status === 200 && response.data) {
-				set({ categories: response.data });
-				console.log(response.data);
-			} else {
-				throw new Error("Failed to fetch categories");
-			}
+			const categoriesData = await fetchCategories();
+			set({ categories: categoriesData });
 		} catch (error) {
 			console.error(error);
 		}
