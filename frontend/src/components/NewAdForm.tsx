@@ -1,35 +1,26 @@
 import { useState, type FormEvent } from "react";
-import axios from "axios";
 import { store } from "../store/storeIndex";
-
-export type NewAdProps = {
-	title: string;
-	description: string;
-	owner: string;
-	price: number;
-	pictureUrl: string;
-	location: string;
-	category: number;
-	tags: number[];
-};
+import type { CreateAdFormData } from "../@types/types";
 
 function NewAdForm() {
+	const createAd = store.adsStore((state) => state.createAd);
+
 	const tags = store.tagsStore((state) => state.tags);
 	const categories = store.categoriesStore((state) => state.categories);
 
-	const [formData, setFormData] = useState<NewAdProps>({
+	const [formData, setFormData] = useState<CreateAdFormData>({
 		title: "",
 		description: "",
 		owner: "",
 		price: 0,
 		pictureUrl: "",
 		location: "",
-		category: 0,
+		category: null,
 		tags: [],
 	});
 
 	const handleInputChange = (
-		field: keyof NewAdProps,
+		field: keyof CreateAdFormData,
 		value: string | number | number[],
 	) => {
 		setFormData((prevData) => ({
@@ -39,29 +30,21 @@ function NewAdForm() {
 	};
 
 	const handleTagsSelection = (tagId: number) => {
-		setFormData((prevData) => {
-			const tagExists = prevData.tags.includes(tagId);
-			const newTags = tagExists
+		setFormData((prevData) => ({
+			...prevData,
+			tags: prevData.tags?.includes(tagId)
 				? prevData.tags.filter((id) => id !== tagId)
-				: [...prevData.tags, tagId];
-			return {
-				...prevData,
-				tags: newTags,
-			};
-		});
+				: [...(prevData.tags || []), tagId],
+		}));
 	};
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(formData);
 		try {
-			const response = await axios.post(
-				"http://localhost:3000/api/ads/create",
-				formData,
-			);
-			console.log(response);
+			console.log("Data", formData);
+			await createAd(formData);
 		} catch (error) {
-			console.error(error);
+			console.error("Failed to create ad:", error);
 		}
 	};
 
@@ -113,7 +96,7 @@ function NewAdForm() {
 						onChange={(e) =>
 							handleInputChange("category", Number(e.target.value))
 						}
-						value={formData.category}
+						value={formData?.category as number}
 						className="select-field"
 					>
 						<option disabled value={0}>
