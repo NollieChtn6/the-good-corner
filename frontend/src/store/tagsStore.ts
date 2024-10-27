@@ -1,5 +1,5 @@
-import axios from "axios";
 import { create } from "zustand";
+import { fetchTags } from "../services/tagsServices";
 
 import type { Tag } from "../@types/types";
 
@@ -12,13 +12,8 @@ export const useTagsStore = create<TagsStore>((set) => ({
 	tags: [],
 	fetchTags: async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/tags");
-			if (response.status === 200 && response.data) {
-				set({ tags: response.data });
-				console.log(response.data);
-			} else {
-				throw new Error("Failed to fetch tags");
-			}
+			const tagsData = await fetchTags();
+			set({ tags: tagsData });
 		} catch (error) {
 			console.error(error);
 		}
