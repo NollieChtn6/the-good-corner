@@ -34,10 +34,13 @@ export type CreateAdFormData = {
 };
 
 export type UpdateAdFormData = {
+	id: number;
 	title: string;
 	description: string;
+	owner: string;
 	price: number;
 	pictureUrl: string;
-	category: number;
+	location: string;
+	category: number | null;
 	tags: number[];
 };
