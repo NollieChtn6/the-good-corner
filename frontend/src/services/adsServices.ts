@@ -1,4 +1,4 @@
-import type { Ad, AdFormData } from "../@types/types";
+import type { Ad, CreateAdFormData, UpdateAdFormData } from "../@types/types";
 
 import axios from "axios";
 
@@ -14,7 +14,7 @@ export const fetchAds = async (): Promise<Ad[]> => {
 	}
 };
 
-export const createAd = async (data: AdFormData): Promise<Ad> => {
+export const createAd = async (data: CreateAdFormData): Promise<Ad> => {
 	try {
 		const response = await axios.post<Ad>(`${BASE_URL}/create`, data);
 		return response.data;
@@ -24,7 +24,10 @@ export const createAd = async (data: AdFormData): Promise<Ad> => {
 	}
 };
 
-export const updateAd = async (adId: number, data: AdFormData): Promise<Ad> => {
+export const updateAd = async (
+	adId: number,
+	data: UpdateAdFormData,
+): Promise<Ad> => {
 	try {
 		const response = await axios.patch<Ad>(`${BASE_URL}/${adId}/update`, data);
 		return response.data;
