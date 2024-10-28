@@ -407,3 +407,61 @@ h1 {
 .create-ad-bt:hover {
 	background-color: #e68a00;
 }
+
+.modal-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.modal {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	width: 100%;
+	max-width: 500px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	z-index: 1001;
+	width: 90%;
+	max-width: 500px;
+}
+.modal-footer {
+	display: flex;
+	justify-content: center;
+	gap: 35px;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+}
