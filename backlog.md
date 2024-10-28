@@ -23,3 +23,4 @@ Last updated on: October, 13, 2024
   - [ ] create route '/catégories/:id/annonces'
   - [ ] create dedicated page
 - [ ] Feature: search bar in header
+- [ ] Fix: updated ad not displayed after update
