@@ -8,30 +8,41 @@ import {
 	JoinColumn,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+
+import { ObjectType, Field } from "type-graphql";
+
 import { CategoryEntity } from "./Category";
 import { TagEntity } from "./Tag";
 
 @Entity({ name: "ad" })
+@ObjectType()
 export class AdEntity extends BaseEntity {
 	@PrimaryGeneratedColumn()
+	@Field()
 	id!: number;
 
 	@Column({ length: 200 })
+	@Field()
 	title!: string;
 
 	@Column()
+	@Field()
 	description!: string;
 
 	@Column()
+	@Field()
 	owner!: string;
 
 	@Column()
+	@Field()
 	price!: number;
 
 	@Column()
+	@Field()
 	pictureUrl?: string;
 
 	@Column()
+	@Field()
 	location!: string;
 
 	@Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
