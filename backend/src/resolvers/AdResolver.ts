@@ -52,7 +52,7 @@ export class AdResolver {
     return newAd;
   }
 
-  @Mutation(() => AdEntity)
+  @Mutation(() => Boolean)
   async deleteAd(@Arg("id") id: number) {
     const selectedAd = await AdEntity.findOneByOrFail({ id });
     if (!selectedAd) {
