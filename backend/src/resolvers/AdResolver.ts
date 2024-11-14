@@ -58,6 +58,9 @@ export class AdResolver {
     if (!selectedAd) {
       throw new Error("Ad not found!");
     }
-    return await selectedAd.remove();
+    const result = await AdEntity.delete(selectedAd.id);
+    if (result) {
+      return true;
+    }
   }
 }
