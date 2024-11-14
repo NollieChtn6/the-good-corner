@@ -29,4 +29,10 @@ export class AdResolver {
     const ads = await AdEntity.find();
     return ads;
   }
+
+  @Query(() => AdEntity)
+  async adById(@Arg("id") id: number) {
+    const selectedAd = await AdEntity.findOneByOrFail({ id });
+    return selectedAd;
+  }
 }
