@@ -25,7 +25,7 @@ class AdInput {
 @Resolver(AdEntity)
 export class AdResolver {
   @Query(() => [AdEntity])
-  async ads() {
+  async ads(): Promise<AdEntity[]> {
     const ads = await AdEntity.find();
     return ads;
   }
