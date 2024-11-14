@@ -63,4 +63,22 @@ export class AdResolver {
       return true;
     }
   }
+
+  @Mutation(() => AdEntity)
+  async replaceAdById(@Arg("id") id: number, @Arg("data") data: AdInput) {
+    const selectedAd = await AdEntity.findOneByOrFail({ id });
+    if (!selectedAd) {
+      throw new Error("Ad not found!");
+    }
+    selectedAd.title = data.title;
+    selectedAd.description = data.description;
+    selectedAd.price = data.price;
+    selectedAd.location = data.location;
+    selectedAd.owner = data.owner;
+    selectedAd.pictureUrl = data.pictureUrl;
+    selectedAd.updatedAt = new Date();
+
+    await selectedAd.save();
+    return selectedAd;
+  }
 }
