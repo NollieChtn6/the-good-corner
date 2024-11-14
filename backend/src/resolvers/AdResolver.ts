@@ -35,4 +35,17 @@ export class AdResolver {
     const selectedAd = await AdEntity.findOneByOrFail({ id });
     return selectedAd;
   }
+
+  @Mutation(() => AdEntity)
+  async createAd(@Arg("ad") { title, description, price, location, owner, pictureUrl }: AdInput) {
+    const newAd = new AdEntity();
+    newAd.title = title;
+    newAd.description = description;
+    newAd.price = price;
+    newAd.location = location;
+    newAd.owner = owner;
+    newAd.pictureUrl = pictureUrl;
+    await newAd.save();
+    return newAd;
+  }
 }
