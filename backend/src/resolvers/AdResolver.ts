@@ -41,13 +41,8 @@ export class AdResolver {
 
   @Mutation(() => AdEntity)
   async createAd(@Arg("ad") { title, description, price, location, owner, pictureUrl }: AdInput) {
-    const newAd = new AdEntity();
-    newAd.title = title;
-    newAd.description = description;
-    newAd.price = price;
-    newAd.location = location;
-    newAd.owner = owner;
-    newAd.pictureUrl = pictureUrl;
+    let newAd = new AdEntity();
+    newAd = Object.assign(newAd, { title, description, price, location, owner, pictureUrl });
     await newAd.save();
     return newAd;
   }
@@ -66,16 +61,11 @@ export class AdResolver {
 
   @Mutation(() => AdEntity)
   async replaceAdById(@Arg("id") id: number, @Arg("data") data: AdInput) {
-    const selectedAd = await AdEntity.findOneByOrFail({ id });
+    let selectedAd = await AdEntity.findOneByOrFail({ id });
     if (!selectedAd) {
       throw new Error("Ad not found!");
     }
-    selectedAd.title = data.title;
-    selectedAd.description = data.description;
-    selectedAd.price = data.price;
-    selectedAd.location = data.location;
-    selectedAd.owner = data.owner;
-    selectedAd.pictureUrl = data.pictureUrl;
+    selectedAd = Object.assign(selectedAd, data);
     selectedAd.updatedAt = new Date();
 
     await selectedAd.save();
