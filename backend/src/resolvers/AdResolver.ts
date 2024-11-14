@@ -47,16 +47,17 @@ export class AdResolver {
     return newAd;
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   async deleteAd(@Arg("id") id: number) {
     const selectedAd = await AdEntity.findOneByOrFail({ id });
     if (!selectedAd) {
       throw new Error("Ad not found!");
     }
     const result = await AdEntity.delete(selectedAd.id);
-    if (result) {
-      return true;
+    if (result.affected === 0) {
+      return "Something went wrong!";
     }
+    return "Ad deleted successfully!";
   }
 
   @Mutation(() => AdEntity)
