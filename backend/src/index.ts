@@ -4,13 +4,14 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { initializeDataSource } from "./config/db";
 import { AdResolver } from "./resolvers/AdResolver";
+import { CategoryResolver } from "./resolvers/CategoryResolver";
 
 const PORT = 4000;
 
 const startServer = async () => {
   await initializeDataSource();
   const schema = await buildSchema({
-    resolvers: [AdResolver],
+    resolvers: [AdResolver, CategoryResolver],
   });
   const server = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(server, {
