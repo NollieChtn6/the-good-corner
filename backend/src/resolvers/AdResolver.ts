@@ -33,6 +33,9 @@ export class AdResolver {
   @Query(() => AdEntity)
   async adById(@Arg("id") id: number) {
     const selectedAd = await AdEntity.findOneByOrFail({ id });
+    if (!selectedAd) {
+      throw new Error("Ad not found!");
+    }
     return selectedAd;
   }
 
