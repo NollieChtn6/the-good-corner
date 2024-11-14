@@ -40,7 +40,9 @@ export class AdResolver {
   }
 
   @Mutation(() => AdEntity)
-  async createAd(@Arg("ad") { title, description, price, location, owner, pictureUrl }: AdInput) {
+  async createAd(
+    @Arg("ad") { title, description, price, location, owner, pictureUrl }: AdInput,
+  ): Promise<AdEntity> {
     let newAd = new AdEntity();
     newAd = Object.assign(newAd, { title, description, price, location, owner, pictureUrl });
     await newAd.save();
@@ -48,7 +50,7 @@ export class AdResolver {
   }
 
   @Mutation(() => String)
-  async deleteAd(@Arg("id") id: number) {
+  async deleteAd(@Arg("id") id: number): Promise<string> {
     const selectedAd = await AdEntity.findOneByOrFail({ id });
     if (!selectedAd) {
       throw new Error("Ad not found!");
@@ -61,7 +63,7 @@ export class AdResolver {
   }
 
   @Mutation(() => AdEntity)
-  async replaceAdById(@Arg("id") id: number, @Arg("data") data: AdInput) {
+  async replaceAdById(@Arg("id") id: number, @Arg("data") data: AdInput): Promise<AdEntity> {
     let selectedAd = await AdEntity.findOneByOrFail({ id });
     if (!selectedAd) {
       throw new Error("Ad not found!");
