@@ -48,4 +48,13 @@ export class AdResolver {
     await newAd.save();
     return newAd;
   }
+
+  @Mutation(() => AdEntity)
+  async deleteAd(@Arg("id") id: number) {
+    const selectedAd = await AdEntity.findOneByOrFail({ id });
+    if (!selectedAd) {
+      throw new Error("Ad not found!");
+    }
+    return await selectedAd.remove();
+  }
 }
