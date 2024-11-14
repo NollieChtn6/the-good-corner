@@ -53,18 +53,13 @@ export class AdEntity extends BaseEntity {
   @Field({ nullable: true })
   updatedAt?: Date;
 
-  @ManyToOne(
-    () => CategoryEntity,
-    (category) => category.ads,
-  )
+  @Field(() => CategoryEntity)
   @JoinColumn({ name: "category" })
-  @Field()
-  category!: CategoryEntity;
-
   @ManyToOne(
     () => CategoryEntity,
     (category) => category.ads,
   )
+  category!: CategoryEntity;
 
   @ManyToMany(() => TagEntity, { cascade: true })
   @JoinTable({
