@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.9.3",
+    "@urql/core": "^5.0.8",
+    "@urql/exchange-graphcache": "^7.2.1",
     "axios": "^1.7.7",
+    "gql.tada": "^1.8.10",
+    "graphql": "^16.9.0",
     "lucide-react": "^0.452.0",
     "luxon": "^3.5.0",
     "react": "^18.3.1",
