@@ -45,10 +45,18 @@ export class AdResolver {
 
   @Mutation(() => AdEntity)
   async createAd(
-    @Arg("ad") { title, description, price, location, owner, pictureUrl }: AdInput,
+    @Arg("ad") { title, description, price, location, owner, pictureUrl, category }: AdInput,
   ): Promise<AdEntity> {
     let newAd = new AdEntity();
-    newAd = Object.assign(newAd, { title, description, price, location, owner, pictureUrl });
+    newAd = Object.assign(newAd, {
+      title,
+      description,
+      price,
+      location,
+      owner,
+      pictureUrl,
+      category,
+    });
     await newAd.save();
     return newAd;
   }
