@@ -10,7 +10,6 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@0no-co/graphqlsp": "^1.12.16",
 		"@apollo/client": "^3.11.10",
 		"@biomejs/biome": "^1.9.3",
 		"axios": "^1.7.7",
