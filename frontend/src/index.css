@@ -7,6 +7,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #f5f5f5;
+  font-size: 62.5%;
 }
 
 h1 {
@@ -66,9 +67,19 @@ h2 {
 .outlet-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  width: 100%;
   margin: auto;
+  height: 100%;
   max-height: 100vh;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  margin: auto;
+  /* background-color: thistle; */
 }
 
 .category-navigation-link {
@@ -198,9 +209,66 @@ h2 {
   width: 100%;
 }
 
-.ad-details {
-  display: grid;
+.ad-details-card {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 18px;
   gap: 24px;
+  height: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  .ad-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .ad-details-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 1rem;
+    color: #666;
+    .ad-owner {
+      margin: 0;
+    }
+    .ad-location {
+      display: flex;
+      align-items: end;
+      margin: 0;
+      gap: 6px;
+    }
+    .ad-price {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin: 0;
+      color: black;
+    }
+    .ad-timestamp {
+      margin: 0;
+      color: black;
+      font-size: 0.9rem;
+    }
+  }
+  .ad-details-image-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .ad-details-image {
+      max-height: 300px;
+      max-width: 200px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+  .ad-details-description-container {
+    font-size: 0.9rem;
+    .ad-description {
+      margin: 0;
+    }
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -227,16 +295,6 @@ h2 {
   }
 }
 
-.ad-details-info {
-  display: grid;
-  gap: 12px;
-  align-content: baseline;
-}
-
-.ad-details-price {
-  font-weight: bold;
-}
-
 .separator {
   width: 100%;
   height: 1px;
@@ -251,7 +309,7 @@ h2 {
   background-color: white;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 300px;
+  width: 350px;
 }
 
 .ad-card-container:hover {
@@ -285,12 +343,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.2rem;
 }
 
 .ad-card-title-price {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.2rem;
 }
 
 .ad-card-location {
@@ -306,26 +366,6 @@ h2 {
 
 .icon {
   margin-right: 4px;
-}
-
-.ad-details {
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  height: auto;
-  margin: 80px auto;
-  padding: 16px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.ad-details-meta {
-  display: flex;
-  flex-direction: column;
-  margin: 16px 0;
-  font-size: 14px;
-  color: #666;
 }
 
 .ad-details-image {
