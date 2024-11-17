@@ -161,7 +161,24 @@ export type introspection_types = {
         type: {
           kind: "NON_NULL";
           name: never;
-          ofType: { kind: "SCALAR"; name: "Float"; ofType: null };
+          ofType: { kind: "SCALAR"; name: "ID"; ofType: null };
+        };
+        defaultValue: null;
+      },
+      {
+        name: "tags";
+        type: {
+          kind: "NON_NULL";
+          name: never;
+          ofType: {
+            kind: "LIST";
+            name: never;
+            ofType: {
+              kind: "NON_NULL";
+              name: never;
+              ofType: { kind: "SCALAR"; name: "ID"; ofType: null };
+            };
+          };
         };
         defaultValue: null;
       },
@@ -208,6 +225,7 @@ export type introspection_types = {
   };
   DateTimeISO: unknown;
   Float: unknown;
+  ID: unknown;
   Mutation: {
     kind: "OBJECT";
     name: "Mutation";
@@ -266,6 +284,22 @@ export type introspection_types = {
           };
         };
       };
+      adsByCategory: {
+        name: "adsByCategory";
+        type: {
+          kind: "NON_NULL";
+          name: never;
+          ofType: {
+            kind: "LIST";
+            name: never;
+            ofType: {
+              kind: "NON_NULL";
+              name: never;
+              ofType: { kind: "OBJECT"; name: "AdEntity"; ofType: null };
+            };
+          };
+        };
+      };
       categories: {
         name: "categories";
         type: {
@@ -282,8 +316,8 @@ export type introspection_types = {
           };
         };
       };
-      categortById: {
-        name: "categortById";
+      categoryById: {
+        name: "categoryById";
         type: {
           kind: "NON_NULL";
           name: never;
