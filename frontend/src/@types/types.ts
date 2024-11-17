@@ -9,7 +9,7 @@ export type Ad = {
   location: string;
   createdAt: Date;
   updatedAt: Date | null;
-  // tags: Tag[] | [];
+  tags: Tag[] | [];
 };
 
 export type Category = {
