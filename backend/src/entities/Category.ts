@@ -13,6 +13,7 @@ export class CategoryEntity extends BaseEntity {
   @Field()
   name!: string;
 
+  @Field(() => [AdEntity])
   @OneToMany(
     () => AdEntity,
     (ad) => ad.category,
