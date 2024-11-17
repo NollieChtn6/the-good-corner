@@ -5,6 +5,7 @@ import { ArrowLeft, Pencil, MapPin, Trash2 } from "lucide-react";
 import { AD_BY_ID_QUERY } from "../graphql/adQueries";
 import { useQuery } from "@apollo/client";
 import { NavLink } from "react-router-dom";
+import { TagItem } from "../components/TagItem";
 
 const AdDetails = () => {
   const navigate = useNavigate();
@@ -57,11 +58,11 @@ const AdDetails = () => {
         <div className="ad-details-description-container">
           <p className="ad-description">{ad.description}</p>
         </div>
-        {/* <div className="tags-container">
+        <div className="tags-container">
           {ad.tags.map((tag) => (
             <TagItem key={tag.id} tag={tag} />
           ))}
-        </div> */}
+        </div>
 
         <div className="ad-details-meta">
           <p className="ad-price">{ad.price}&nbsp;€</p>
