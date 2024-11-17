@@ -61,6 +61,7 @@ export class AdEntity extends BaseEntity {
   )
   category!: CategoryEntity;
 
+  @Field(() => [TagEntity])
   @ManyToMany(() => TagEntity, { cascade: true })
   @JoinTable({
     name: "ad_has_tags",
