@@ -11,7 +11,7 @@ export class CategoryResolver {
   }
 
   @Query(() => CategoryEntity)
-  async categortById(@Arg("id") id: number): Promise<CategoryEntity> {
+  async categoryById(@Arg("id") id: number): Promise<CategoryEntity> {
     const selectedCategory = await CategoryEntity.findOneByOrFail({ id });
     if (!selectedCategory) {
       throw new Error("Category not found!");

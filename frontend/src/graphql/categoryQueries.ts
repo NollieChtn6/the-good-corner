@@ -11,3 +11,12 @@ query Categories {
 `);
 
 export type CategoriesQueryResult = ResultOf<typeof CATEGORIES_QUERY>;
+
+export const CATEGORY_BY_ID_QUERY = graphql(`
+  query CategortById($categortByIdId: Float!) {
+    categortById(id: $categortByIdId) {
+      id
+      name
+    }
+  }
+`);
