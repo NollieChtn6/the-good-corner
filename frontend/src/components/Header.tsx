@@ -50,7 +50,11 @@ function Header() {
         {categories.map((category, id) => (
           <>
             {id > 0 && "•"}
-            <NavLink to="url" className="category-navigation-link" key={category.id}>
+            <NavLink
+              to={`/categories/${category.id}`}
+              className="category-navigation-link"
+              key={category.id}
+            >
               {category.name}
             </NavLink>{" "}
           </>
