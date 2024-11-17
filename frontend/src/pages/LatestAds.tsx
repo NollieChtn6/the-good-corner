@@ -6,7 +6,6 @@ import { ADS_QUERY } from "../graphql/adQueries";
 
 function LatestAds() {
   const { data, loading, error } = useQuery<{ ads: Ad[] }>(ADS_QUERY);
-  console.log("Data:", data?.ads);
   const ads = data?.ads ?? [];
 
   if (loading) {
