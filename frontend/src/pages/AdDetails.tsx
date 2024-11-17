@@ -4,6 +4,7 @@ import type { Ad } from "../@types/types";
 import { ArrowLeft, Pencil, MapPin, Trash2 } from "lucide-react";
 import { AD_BY_ID_QUERY } from "../graphql/adQueries";
 import { useQuery } from "@apollo/client";
+import { NavLink } from "react-router-dom";
 
 const AdDetails = () => {
   const navigate = useNavigate();
@@ -40,7 +41,10 @@ const AdDetails = () => {
         <h1 className="ad-title">{ad.title}</h1>
         <div className="ad-details-meta">
           <p className="ad-owner">
-            Annonce publiée par <strong>{ad.owner}</strong> dans <strong>{ad.category.name}</strong>
+            Annonce publiée par <span className="data">{ad.owner}</span> dans{" "}
+            <span className="data link">
+              <NavLink to={`/categories/${ad.category.id}`}>{ad.category.name}</NavLink>
+            </span>
           </p>
           <p className="ad-location">
             <MapPin />
