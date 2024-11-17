@@ -25,6 +25,9 @@ class AdInput {
 
   @Field(() => ID, { nullable: false })
   category!: CategoryEntity;
+
+  @Field(() => [ID])
+  tags!: TagEntity[] | [];
 }
 
 @Resolver(AdEntity)
@@ -39,7 +42,7 @@ export class AdResolver {
   async adById(@Arg("id") id: number): Promise<AdEntity> {
     const selectedAd = await AdEntity.findOneOrFail({
       where: { id },
-      relations: ["category"],
+      relations: ["category", "tags"],
     });
     if (!selectedAd) {
       throw new Error("Ad not found!");
