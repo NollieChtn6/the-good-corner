@@ -22,8 +22,8 @@ export const CATEGORY_BY_ID_QUERY = graphql(`
 `);
 
 export const ADS_BY_CATEGORY_QUERY = graphql(`
-  query AdsByCategory($category: Float!) {
-    adsByCategory(category: $category) {
+  query AdsByCategory($categoryId: Float!) {
+    adsByCategory(categoryId: $categoryId) {
       id
       title
       description
@@ -34,7 +34,6 @@ export const ADS_BY_CATEGORY_QUERY = graphql(`
       createdAt
       updatedAt
       category {
-        id
         name
       }
     }
