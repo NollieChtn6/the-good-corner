@@ -22,3 +22,22 @@ query AdsQuery {
 `);
 
 export type AdsQueryResult = ResultOf<typeof ADS_QUERY>;
+
+export const AD_BY_ID_QUERY = graphql(`
+  query AdById($adByIdId: Float!) {
+  adById(id: $adByIdId) {
+    id
+    title
+    description
+    owner
+    price
+    pictureUrl
+    location
+    createdAt
+    updatedAt
+    category {
+      id
+      name
+    }
+  }
+}`);
