@@ -18,7 +18,7 @@ function LatestAds() {
   const latestAds = data?.ads?.slice(Math.max(ads.length - 9, 0)).reverse() || [];
 
   return (
-    <>
+    <div className="page-content">
       <h2>Annonces récentes</h2>
       <section className="recent-ads">
         {latestAds.map((ad) => (
@@ -39,7 +39,7 @@ function LatestAds() {
           Voir toutes les annonces
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 
