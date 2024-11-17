@@ -20,13 +20,13 @@ export class CategoryResolver {
   }
 
   @Query(() => [AdEntity])
-  async adsByCategory(@Arg("category") category: number): Promise<AdEntity[]> {
+  async adsByCategory(@Arg("categoryId") categoryId: number): Promise<AdEntity[]> {
     const ads = await AdEntity.find({
       relations: {
         category: true,
       },
       where: {
-        category: { id: category },
+        category: { id: categoryId },
       },
     });
     return ads;
