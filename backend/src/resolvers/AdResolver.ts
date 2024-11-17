@@ -1,6 +1,7 @@
-import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Field, InputType, Mutation, Query, Resolver, ID } from "type-graphql";
 import { AdEntity } from "../entities/Ad";
 import type { CategoryEntity } from "../entities/Category";
+import type { TagEntity } from "../entities/Tag";
 
 @InputType()
 class AdInput {
@@ -22,7 +23,7 @@ class AdInput {
   @Field()
   location!: string;
 
-  @Field(() => Number, { nullable: false })
+  @Field(() => ID, { nullable: false })
   category!: CategoryEntity;
 }
 
@@ -36,7 +37,10 @@ export class AdResolver {
 
   @Query(() => AdEntity)
   async adById(@Arg("id") id: number): Promise<AdEntity> {
-    const selectedAd = await AdEntity.findOneOrFail({ where: { id }, relations: ["category"] });
+    const selectedAd = await AdEntity.findOneOrFail({
+      where: { id },
+      relations: ["category"],
+    });
     if (!selectedAd) {
       throw new Error("Ad not found!");
     }
