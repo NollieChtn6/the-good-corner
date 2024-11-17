@@ -23,7 +23,7 @@ class AdInput {
   location!: string;
 
   @Field(() => Number, { nullable: false })
-  category!: number;
+  category!: CategoryEntity;
 }
 
 @Resolver(AdEntity)
