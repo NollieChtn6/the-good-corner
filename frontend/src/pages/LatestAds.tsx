@@ -20,7 +20,7 @@ function LatestAds() {
   return (
     <div className="page-content">
       <h2>Annonces récentes</h2>
-      <section className="recent-ads">
+      <section className="gallery">
         {latestAds.map((ad) => (
           <div key={ad.id}>
             <AdCard
