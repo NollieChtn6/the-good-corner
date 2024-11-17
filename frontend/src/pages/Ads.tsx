@@ -15,7 +15,7 @@ function AllAds() {
   }
 
   return (
-    <>
+    <div className="page-content">
       <h2>Toutes les annonces</h2>
       <section className="recent-ads">
         {ads.map((ad) => (
@@ -29,7 +29,7 @@ function AllAds() {
           />
         ))}
       </section>
-    </>
+    </div>
   );
 }
 
