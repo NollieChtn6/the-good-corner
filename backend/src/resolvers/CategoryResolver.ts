@@ -1,5 +1,6 @@
 import { Query, Resolver, Arg } from "type-graphql";
 import { CategoryEntity } from "../entities/Category";
+import { AdEntity } from "../entities/Ad";
 
 @Resolver(CategoryEntity)
 export class CategoryResolver {
@@ -16,5 +17,18 @@ export class CategoryResolver {
       throw new Error("Category not found!");
     }
     return selectedCategory;
+  }
+
+  @Query(() => [AdEntity])
+  async adsByCategory(@Arg("category") category: number): Promise<AdEntity[]> {
+    const ads = await AdEntity.find({
+      relations: {
+        category: true,
+      },
+      where: {
+        category: { id: category },
+      },
+    });
+    return ads;
   }
 }
