@@ -79,7 +79,6 @@ h2 {
   gap: 20px;
   padding: 20px;
   margin: auto;
-  /* background-color: thistle; */
 }
 
 .category-navigation-link {
@@ -230,6 +229,9 @@ h2 {
     gap: 6px;
     font-size: 1rem;
     color: #666;
+    .data {
+      font-weight: bold;
+    }
     .ad-owner {
       margin: 0;
     }
