@@ -8,6 +8,7 @@ export const graphql = initGraphQLTada<{
     DateTime: Date;
     Float: number;
     String: string;
+    ID: number;
   };
 }>();
 
