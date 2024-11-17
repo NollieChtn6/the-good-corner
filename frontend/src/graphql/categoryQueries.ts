@@ -20,3 +20,23 @@ export const CATEGORY_BY_ID_QUERY = graphql(`
       }
     }
 `);
+
+export const ADS_BY_CATEGORY_QUERY = graphql(`
+  query AdsByCategory($category: Float!) {
+    adsByCategory(category: $category) {
+      id
+      title
+      description
+      owner
+      price
+      pictureUrl
+      location
+      createdAt
+      updatedAt
+      category {
+        id
+        name
+      }
+    }
+  }
+`);
