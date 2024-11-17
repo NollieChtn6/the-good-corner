@@ -34,7 +34,7 @@ class AdInput {
 export class AdResolver {
   @Query(() => [AdEntity])
   async ads(): Promise<AdEntity[]> {
-    const ads = await AdEntity.find({ relations: ["category"] });
+    const ads = await AdEntity.find({ relations: ["category", "tags"] });
     return ads;
   }
 
