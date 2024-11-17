@@ -17,7 +17,7 @@ function AllAds() {
   return (
     <div className="page-content">
       <h2>Toutes les annonces</h2>
-      <section className="recent-ads">
+      <section className="gallery">
         {ads.map((ad) => (
           <AdCard
             key={ad.id}
