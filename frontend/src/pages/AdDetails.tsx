@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { DateTime } from "luxon";
 import type { Ad } from "../@types/types";
 import { ArrowLeft, Pencil, MapPin, Trash2 } from "lucide-react";
-import { AD_BY_ID_QUERY } from "../graphql/adQueries";
+import { AD_BY_ID_QUERY } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { NavLink } from "react-router-dom";
 import { TagItem } from "../components/TagItem";
