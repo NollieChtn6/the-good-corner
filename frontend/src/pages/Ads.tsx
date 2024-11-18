@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import type { Ad } from "../@types/types";
 import AdCard from "../components/AdCard";
-import { ADS_QUERY } from "../graphql/adQueries";
+import { ADS_QUERY } from "../graphql/queries";
 
 function AllAds() {
   const { data, loading, error } = useQuery<{ ads: Ad[] }>(ADS_QUERY);
