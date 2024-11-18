@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Ad } from "../@types/types";
 import AdCard from "../components/AdCard";
-import { ADS_BY_CATEGORY_QUERY } from "../graphql/categoryQueries";
+import { ADS_BY_CATEGORY_QUERY } from "../graphql/queries";
 
 export type CategoryName = string | null;
 
