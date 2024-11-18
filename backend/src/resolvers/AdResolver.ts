@@ -1,7 +1,8 @@
 import { Arg, Field, InputType, Mutation, Query, Resolver, ID } from "type-graphql";
 import { AdEntity } from "../entities/Ad";
-import type { CategoryEntity } from "../entities/Category";
-import type { TagEntity } from "../entities/Tag";
+import { CategoryEntity } from "../entities/Category";
+import { TagEntity } from "../entities/Tag";
+import { In } from "typeorm";
 
 @InputType()
 class AdInput {
@@ -24,7 +25,7 @@ class AdInput {
   location!: string;
 
   @Field(() => ID, { nullable: false })
-  category!: CategoryEntity;
+  category!: number;
 
   @Field(() => [ID])
   tags!: TagEntity[] | [];
@@ -51,19 +52,13 @@ export class AdResolver {
   }
 
   @Mutation(() => AdEntity)
-  async createAd(
-    @Arg("ad") { title, description, price, location, owner, pictureUrl, category }: AdInput,
-  ): Promise<AdEntity> {
+  async createAd(@Arg("adInput") adInput: AdInput): Promise<AdEntity> {
     let newAd = new AdEntity();
-    newAd = Object.assign(newAd, {
-      title,
-      description,
-      price,
-      location,
-      owner,
-      pictureUrl,
-      category,
-    });
+    newAd = Object.assign(newAd, adInput);
+    const category = await CategoryEntity.findOneByOrFail({ id: adInput.category });
+    const tags = await TagEntity.findBy({ id: In(adInput.tags) });
+    newAd.category = category;
+    newAd.tags = tags;
     await newAd.save();
     return newAd;
   }
