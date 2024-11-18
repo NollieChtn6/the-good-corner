@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Category, Tag } from "../@types/types";
 import type { CreateAdFormData } from "../@types/types";
 import { CREATE_AD_MUTATION } from "../graphql/mutations";
@@ -8,10 +9,11 @@ import { CATEGORIES_AND_TAGS_QUERY } from "../graphql/queries";
 
 function NewAdForm() {
   const { data } = useQuery<{ categories: Category[]; tags: Tag[] }>(CATEGORIES_AND_TAGS_QUERY);
-  const [createAd, { loading: creatingAd, error: createAdError }] =
+  const [createAd, { data: sumbittedData, loading: creatingAd, error: createAdError }] =
     useMutation<CreateAdMutationResult>(CREATE_AD_MUTATION);
   const categories = data?.categories ?? [];
   const tags = data?.tags ?? [];
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<CreateAdFormData>({
     title: "",
@@ -51,6 +53,11 @@ function NewAdForm() {
       console.error("Failed to create ad:", error);
     }
   };
+
+  useEffect(() => {
+    if (!sumbittedData) return;
+    navigate(`/annonces/${sumbittedData.createAd.id}`);
+  }, [sumbittedData, navigate]);
 
   return (
     <div className="form-container">
@@ -168,7 +175,7 @@ function NewAdForm() {
           />
         </div>
         <div className="btn-container">
-          <button className="button" type="submit">
+          <button className="button" type="submit" disabled={creatingAd}>
             {creatingAd ? "Création en cours..." : "Créer"}
           </button>
         </div>
