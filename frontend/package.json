@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tada-output": "npx gql-tada generate-output"
+    "tada-generate:output": "npx gql-tada generate-output",
+    "tada-generate:schema": "npx gql-tada generate schema 'http://localhost:4000' --output './schema.graphql'"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",
