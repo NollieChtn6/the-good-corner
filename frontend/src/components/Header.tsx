@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { NavLink } from "react-router-dom";
 import type { Category } from "../@types/types";
-import { CATEGORIES_QUERY } from "../graphql/categoryQueries";
+import { CATEGORIES_QUERY } from "../graphql/queries";
 
 function Header() {
   const { data, loading, error } = useQuery<{ categories: Category[] }>(CATEGORIES_QUERY);
