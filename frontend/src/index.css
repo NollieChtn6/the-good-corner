@@ -271,6 +271,11 @@ h2 {
       margin: 0;
     }
   }
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -517,4 +522,8 @@ h2 {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+}
+
+.error {
+  color: red;
 }
