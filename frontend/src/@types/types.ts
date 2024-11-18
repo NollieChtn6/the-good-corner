@@ -29,7 +29,7 @@ export type CreateAdFormData = {
   price: number;
   pictureUrl: string;
   location: string;
-  category: number | null;
+  category: number;
   tags: number[];
 };
 
@@ -41,6 +41,6 @@ export type UpdateAdFormData = {
   price: number;
   pictureUrl: string;
   location: string;
-  category: number | null;
+  category: number;
   tags: number[];
 };
