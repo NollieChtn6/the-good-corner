@@ -13,7 +13,7 @@ export function Category() {
   const { data, loading, error } = useQuery<{ adsByCategory: Ad[] }>(ADS_BY_CATEGORY_QUERY, {
     variables: { categoryId: Number(id) },
   });
-  let categoryName = null;
+  let categoryName: CategoryName = null;
   const ads = data?.adsByCategory ?? [];
 
   if (loading) {
