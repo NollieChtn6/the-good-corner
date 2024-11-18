@@ -88,3 +88,16 @@ export const ADS_BY_CATEGORY_QUERY = graphql(`
     }
   }
 `);
+
+export const CATEGORIES_AND_TAGS_QUERY = graphql(`
+  query CategoriesAndTags {
+    categories {
+      id
+      name
+    }
+    tags {
+      id
+      label
+    }
+  }
+  `);
