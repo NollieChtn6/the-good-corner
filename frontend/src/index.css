@@ -382,18 +382,6 @@ h2 {
   margin: 16px 0;
 }
 
-.tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 16px 0;
-}
-
-.tag-checkbox {
-  margin-right: 15px;
-  margin-bottom: 10px;
-}
-
 .tag-item {
   display: flex;
   align-items: center;
@@ -424,31 +412,53 @@ h2 {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.text-field,
-.select-field {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #ffa41b;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-.create-ad-btn {
-  width: 40%;
-  padding: 10px;
-  margin: auto;
-  background-color: #ffa41b;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.create-ad-bt:hover {
-  background-color: #e68a00;
+  gap: 24px;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    .form-input {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      .text-field,
+      .select-field {
+        max-width: 100%;
+        padding: 10px;
+        border: 2px solid #ffa41b;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+    }
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 16px 0;
+      .tag-checkbox {
+        gap: 6px;
+      }
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      .create-ad-btn {
+        width: 40%;
+        padding: 10px;
+        margin: auto;
+        background-color: #ffa41b;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .create-ad-bt:hover {
+        background-color: #e68a00;
+      }
+    }
+  }
 }
 
 .modal-background {
