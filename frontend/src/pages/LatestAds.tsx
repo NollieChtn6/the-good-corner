@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import type { Ad } from "../@types/types";
 import AdCard from "../components/AdCard";
-import { ADS_QUERY } from "../graphql/adQueries";
+import { ADS_QUERY } from "../graphql/queries";
 
 function LatestAds() {
   const { data, loading, error } = useQuery<{ ads: Ad[] }>(ADS_QUERY);
