@@ -11,10 +11,13 @@ INSERT INTO "tag" (label) VALUES
 ("Remise en mains propres"),
 ("Envoi possible"),
 ("Nouveau"),
+("Article neuf"),
 ("Occasion"),
+("Frais de port inclus"),
+("Prix en baisse"),
 ("Prix négociable"),
+("Prix ferme"),
 ("Rare"),
-("Dernière chance"),
-("Prix ferme");
+("Dernière chance");
 
 COMMIT;

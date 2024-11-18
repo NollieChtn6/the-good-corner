@@ -6,22 +6,15 @@ DELETE FROM "category";
 
 INSERT INTO "category" (name) VALUES
 ("Véhicules"),
-("Électronique"),
-("Meubles"),
-("Jardinage"),
-("Jouets"),
-("Mode"),
-("Informatique"),
+("Maison & Déco"),
 ("Sport"),
 ("Immobilier"),
 ("Animaux"),
-("Instruments de musique"),
-("Livres"),
-("Jeux vidéo"),
-("Bricolage"),
-("Multimédia"),
-("Accessoires"),               
-("Bureau"),
-("Papeterie");  
+("Mode & Beauté"),
+("Jardin"),
+("Tech & Informatique"),
+("Enfants"),
+("Culture"),
+("Loisirs");
 
 COMMIT;
