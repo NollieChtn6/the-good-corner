@@ -1,19 +1,15 @@
-import { useState, type FormEvent } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { type FormEvent, useState } from "react";
 import type { Category, Tag } from "../@types/types";
 import type { CreateAdFormData } from "../@types/types";
+import { CREATE_AD_MUTATION } from "../graphql/mutations";
+import type { CreateAdMutationResult } from "../graphql/mutations";
 import { CATEGORIES_AND_TAGS_QUERY } from "../graphql/queries";
-import { useQuery } from "@apollo/client";
 
 function NewAdForm() {
   const { data } = useQuery<{ categories: Category[]; tags: Tag[] }>(CATEGORIES_AND_TAGS_QUERY);
-
-  // if (loading) {
-  //   return <p>Chargement des catégories et des tags en cours...</p>;
-  // }
-  // if (error) {
-  //   return <p>Une erreur est survenue pendant le chargerment des données</p>;
-  // }
-
+  const [createAd, { loading: creatingAd, error: createAdError }] =
+    useMutation<CreateAdMutationResult>(CREATE_AD_MUTATION);
   const categories = data?.categories ?? [];
   const tags = data?.tags ?? [];
 
@@ -24,7 +20,7 @@ function NewAdForm() {
     price: 0,
     pictureUrl: "",
     location: "",
-    category: null,
+    category: 0,
     tags: [],
   });
 
@@ -47,8 +43,10 @@ function NewAdForm() {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("Data", formData);
-      await createAd(formData);
+      const response = await createAd({
+        variables: { adInput: formData },
+      });
+      console.log("Ad created successfully:", response.data?.createAd);
     } catch (error) {
       console.error("Failed to create ad:", error);
     }
@@ -171,9 +169,10 @@ function NewAdForm() {
         </div>
         <div className="btn-container">
           <button className="button" type="submit">
-            Créer
+            {creatingAd ? "Création en cours..." : "Créer"}
           </button>
         </div>
+        {createAdError && <p className="error">Une erreur est survenue. Veuillez réessayer.</p>}
       </form>
     </div>
   );
