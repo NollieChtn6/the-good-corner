@@ -34,7 +34,6 @@ export type CreateAdFormData = {
 };
 
 export type UpdateAdFormData = {
-  id: number;
   title: string;
   description: string;
   owner: string;
