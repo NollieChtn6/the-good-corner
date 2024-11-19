@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DateTime } from "luxon";
 import type { Ad } from "../@types/types";
@@ -6,6 +7,8 @@ import { AD_BY_ID_QUERY } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { NavLink } from "react-router-dom";
 import { TagItem } from "../components/TagItem";
+import EditAdForm from "../components/EditAdForm";
+import type { UpdateAdFormData } from "../@types/types";
 
 const AdDetails = () => {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ const AdDetails = () => {
 
   const ad = data?.adById;
 
-  // const [editFormIsVisible, setEditFormIsVisible] = useState<boolean>(false);
+  const [editFormIsVisible, setEditFormIsVisible] = useState<boolean>(false);
 
   if (!ad) return <p>Annonce non trouvée</p>;
   if (loading) return <p>Chargement de l&rsquo;annonce en cours...</p>;
@@ -24,12 +27,13 @@ const AdDetails = () => {
 
   const formattedCreationDate = DateTime.fromISO(ad.createdAt).toLocaleString(DateTime.DATE_FULL);
 
-  // const handleSave = async (updatedAd: UpdateAdFormData) => {
-  //   console.log("Mise à jour de l'annonce avec les données suivantes :", updatedAd);
-  //   console.log("ID de l'annonce :", ad.id);
-  //   await updateAd(ad.id, updatedAd);
-  //   setEditFormIsVisible(false);
-  // };
+  const handleSave = async (updatedAd: UpdateAdFormData) => {
+    // console.log("Mise à jour de l'annonce avec les données suivantes :", updatedAd);
+    // console.log("ID de l'annonce :", ad.id);
+    // await updateAd(ad.id, updatedAd);
+    // setEditFormIsVisible(false);
+    console.log("Updated data:", updatedAd);
+  };
 
   return (
     <div className="page-content">
@@ -69,7 +73,7 @@ const AdDetails = () => {
           <p className="ad-timestamp">Annonce ajoutée le&nbsp;: {formattedCreationDate} </p>
         </div>
         <div className="ad-details-actions">
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={() => setEditFormIsVisible(true)}>
             <Pencil size={16} className="icon edit-icon" /> Modifier
           </button>
           <button className="button" type="button">
@@ -77,14 +81,14 @@ const AdDetails = () => {
           </button>
         </div>
       </div>
-      {/* {editFormIsVisible && (
+      {editFormIsVisible && (
         <EditAdForm
           isVisible={editFormIsVisible}
           selectedAd={ad}
           onClose={() => setEditFormIsVisible(false)}
           onSave={handleSave}
         />
-      )} */}
+      )}
     </div>
   );
 };
