@@ -45,3 +45,9 @@ export const UPDATE_AD_MUTATION = graphql(`
     }
   }
 `);
+
+export const DELETE_AD_MUTATION = graphql(`
+  mutation DeleteAd($deleteAdId: Float!) {
+    deleteAd(id: $deleteAdId)
+  }
+  `);
