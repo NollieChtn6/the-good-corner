@@ -8,6 +8,7 @@ import type { Ad } from "../@types/types";
 import type { UpdateAdFormData } from "../@types/types";
 import EditAdForm from "../components/EditAdForm";
 import { TagItem } from "../components/TagItem";
+import { Popup } from "../components/Popup";
 import { UPDATE_AD_MUTATION } from "../graphql/mutations";
 import { AD_BY_ID_QUERY } from "../graphql/queries";
 
@@ -23,6 +24,7 @@ const AdDetails = () => {
   const ad = data?.adById;
 
   const [editFormIsVisible, setEditFormIsVisible] = useState<boolean>(false);
+  const [popupIsVisible, setPopupIsVisible] = useState<boolean>(false);
 
   if (!ad) return <p>Annonce non trouvée</p>;
   if (loading) return <p>Chargement de l&rsquo;annonce en cours...</p>;
@@ -84,7 +86,7 @@ const AdDetails = () => {
           <button className="button" type="button" onClick={() => setEditFormIsVisible(true)}>
             <Pencil size={16} className="icon edit-icon" /> Modifier
           </button>
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={() => setPopupIsVisible(true)}>
             <Trash2 size={16} className="icon delete-icon" /> Supprimer
           </button>
         </div>
@@ -96,6 +98,13 @@ const AdDetails = () => {
           onClose={() => setEditFormIsVisible(false)}
           onSave={handleSave}
           isUpdating={updatingAd}
+        />
+      )}
+      {popupIsVisible && (
+        <Popup
+          isVisible={editFormIsVisible}
+          selectedAd={ad}
+          onClose={() => setPopupIsVisible(false)}
         />
       )}
     </div>
