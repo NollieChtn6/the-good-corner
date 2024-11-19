@@ -83,6 +83,10 @@ export class AdResolver {
       throw new Error("Ad not found!");
     }
     selectedAd = Object.assign(selectedAd, data);
+    const category = await CategoryEntity.findOneByOrFail({ id: data.category });
+    const tags = await TagEntity.findBy({ id: In(data.tags) });
+    selectedAd.category = category;
+    selectedAd.tags = tags;
     selectedAd.updatedAt = new Date();
 
     await selectedAd.save();
