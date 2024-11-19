@@ -524,6 +524,11 @@ h2 {
   z-index: 1000;
 }
 
+.warning,
+.error {
+  font-size: 1rem;
+}
+
 .error {
   color: red;
 }
