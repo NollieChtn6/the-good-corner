@@ -8,9 +8,10 @@ type EditAdFormProps = {
   selectedAd: Ad;
   onClose: () => void;
   onSave: (updatedAd: UpdateAdFormData) => void;
+  isUpdating: boolean;
 };
 
-const EditAdForm = ({ selectedAd, onClose, onSave }: EditAdFormProps) => {
+const EditAdForm = ({ selectedAd, onClose, onSave, isUpdating }: EditAdFormProps) => {
   const { data } = useQuery<{ categories: Category[]; tags: Tag[] }>(CATEGORIES_AND_TAGS_QUERY);
   const categories = data?.categories ?? [];
   const tags = data?.tags ?? [];
@@ -134,7 +135,7 @@ const EditAdForm = ({ selectedAd, onClose, onSave }: EditAdFormProps) => {
           </div>
           <div className="modal-footer">
             <button className="button" type="submit">
-              Enregistrer
+              {isUpdating ? "Enregistrement..." : "Enregistrer"}
             </button>
             <button className="button" type="button" onClick={onClose}>
               Annuler
