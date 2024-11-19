@@ -16,7 +16,6 @@ const EditAdForm = ({ selectedAd, onClose, onSave }: EditAdFormProps) => {
   const tags = data?.tags ?? [];
 
   const [formData, setFormData] = useState<UpdateAdFormData>({
-    id: selectedAd.id,
     title: selectedAd.title,
     description: selectedAd.description,
     owner: selectedAd.owner,
