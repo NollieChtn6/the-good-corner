@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import { ArrowLeft, MapPin, Pencil, Trash2 } from "lucide-react";
 import { DateTime } from "luxon";
-import type { Ad } from "../@types/types";
-import { ArrowLeft, Pencil, MapPin, Trash2 } from "lucide-react";
-import { AD_BY_ID_QUERY } from "../graphql/queries";
-import { useQuery } from "@apollo/client";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { TagItem } from "../components/TagItem";
-import EditAdForm from "../components/EditAdForm";
+import type { Ad } from "../@types/types";
 import type { UpdateAdFormData } from "../@types/types";
+import EditAdForm from "../components/EditAdForm";
+import { TagItem } from "../components/TagItem";
+import { UPDATE_AD_MUTATION } from "../graphql/mutations";
+import { AD_BY_ID_QUERY } from "../graphql/queries";
 
 const AdDetails = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const AdDetails = () => {
   const { data, loading, error } = useQuery<{ adById: Ad }>(AD_BY_ID_QUERY, {
     variables: { adByIdId: Number(id) },
   });
+  const [updateAd, { data: sumbittedData, loading: updatingAd, error: updateAdError }] =
+    useMutation(UPDATE_AD_MUTATION);
 
   const ad = data?.adById;
 
@@ -28,11 +31,16 @@ const AdDetails = () => {
   const formattedCreationDate = DateTime.fromISO(ad.createdAt).toLocaleString(DateTime.DATE_FULL);
 
   const handleSave = async (updatedAd: UpdateAdFormData) => {
-    // console.log("Mise à jour de l'annonce avec les données suivantes :", updatedAd);
-    // console.log("ID de l'annonce :", ad.id);
-    // await updateAd(ad.id, updatedAd);
-    // setEditFormIsVisible(false);
-    console.log("Updated data:", updatedAd);
+    try {
+      const response = await updateAd({
+        variables: { data: updatedAd, replaceAdByIdId: ad.id },
+      });
+      console.log("Ad updated successfully:", response.data?.replaceAdById);
+      setEditFormIsVisible(false);
+    } catch (error) {
+      console.log(updateAdError);
+      console.error("Failed to update ad:", error);
+    }
   };
 
   return (
@@ -87,6 +95,7 @@ const AdDetails = () => {
           selectedAd={ad}
           onClose={() => setEditFormIsVisible(false)}
           onSave={handleSave}
+          isUpdating={updatingAd}
         />
       )}
     </div>
