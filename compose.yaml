@@ -1,14 +1,46 @@
 services:
+
   backend: 
-      build: ./backend
-      ports:
-        - 4000:4000
-      volumes:
-        - ./backend/src/:/app/src/
+    container_name: tgc-backend
+    build: ./backend
+    ports:
+      - 4000:4000
+    volumes:
+      - ./backend/src/:/app/src/
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
 
   frontend:
+    container_name: tgc-frontend
     build: ./frontend
     ports:
       - 8080:5173
     volumes:
       - ./frontend/src/:/app/src/
+    environment:
+      VITE_GATEWAY_PORT: ${GATEWAY_PORT}
+  
+  database:
+    container_name: tgc-database
+    image: postgres
+    volumes:
+      - ./persist/data/:/var/lib/postgresql/data
+    environment:
+    # /!\ Environment syntax: https://stackoverflow.com/questions/60200966/docker-compose-gives-invalid-environment-type-error
+      # - DB_PASSWORD=${DB_PASSWORD}
+      # - DB_NAME=${DB_NAME}
+      # - DB_USER=${DB_USER}
+      # - DB_HOST=${DB_HOST}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
+
+  vizualiser:
+    container_name: tgc-vizualiser
+    image: adminer
+    ports:
+      - 8081:8080
