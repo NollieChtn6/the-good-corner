@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import { AdEntity } from "../entities/Ad";
 import { CategoryEntity } from "../entities/Category";
 import { TagEntity } from "../entities/Tag";
+import { UserEntity } from "../entities/User";
 import { config } from "dotenv";
 
 config();
@@ -14,7 +15,7 @@ const dataSource = new DataSource({
 	password: DB_PASSWORD,
 	database: DB_NAME,
 	port: 5432,
-	entities: [AdEntity, CategoryEntity, TagEntity],
+	entities: [AdEntity, CategoryEntity, TagEntity, UserEntity],
 	synchronize: true,
 });
 
