@@ -52,10 +52,12 @@ export class UserResolver {
       username: newUserData.username,
       email: newUserData.email,
       password: hashedPassword,
+      role: "USER",
     }).save();
 
     // Define token content
-    const tokenContent = { email: user.email, username: user.username };
+    // By adding 'role' to the token content, we can use it in the authChecker function to allow or deny access to protected resources
+    const tokenContent = { email: user.email, username: user.username, role: user.role };
 
     // Create token
     const token = jwt.sign(tokenContent, JWT_SECRET as string);
@@ -87,7 +89,8 @@ export class UserResolver {
     }
 
     // Define token content
-    const tokenContent = { email: user.email, username: user.username };
+    // By adding 'role' to the token content, we can use it in the authChecker function to allow or deny access to protected resources
+    const tokenContent = { email: user.email, username: user.username, role: user.role };
 
     // Create token
     const token = jwt.sign(tokenContent, JWT_SECRET);
