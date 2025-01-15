@@ -1,10 +1,9 @@
-import { Arg, Field, InputType, Mutation, Query, Resolver, ID, Ctx } from "type-graphql";
+import { Arg, Field, InputType, Mutation, Query, Resolver, Ctx, Authorized } from "type-graphql";
 import { UserEntity } from "../entities/User";
 import type { Response } from "express";
 
 import * as argon from "argon2";
 import * as jwt from "jsonwebtoken";
-import e from "express";
 
 const { JWT_SECRET } = process.env;
 
@@ -55,8 +54,10 @@ export class UserResolver {
       role: "USER",
     }).save();
 
-    // Define token content
-    // By adding 'role' to the token content, we can use it in the authChecker function to allow or deny access to protected resources
+    /* 
+      Define token content: y adding 'role' to the token content, 
+      we can use it in the authChecker function to allow or deny access to protected resources.
+    */
     const tokenContent = { email: user.email, username: user.username, role: user.role };
 
     // Create token
@@ -88,8 +89,10 @@ export class UserResolver {
       throw new Error("Invalid credentials!");
     }
 
-    // Define token content
-    // By adding 'role' to the token content, we can use it in the authChecker function to allow or deny access to protected resources
+    /* 
+      Define token content: y adding 'role' to the token content, 
+      we can use it in the authChecker function to allow or deny access to protected resources.
+    */
     const tokenContent = { email: user.email, username: user.username, role: user.role };
 
     // Create token
@@ -103,5 +106,13 @@ export class UserResolver {
       username: user.username,
     };
     return JSON.stringify(userProfile);
+  }
+
+  // This query is protected and can only be accessed by connected users
+  @Authorized()
+  @Query(() => [UserEntity])
+  async usersAsUser() {
+    const users = await UserEntity.find();
+    return users;
   }
 }
