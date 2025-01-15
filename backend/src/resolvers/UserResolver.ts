@@ -57,9 +57,12 @@ export class UserResolver {
     // Define token content
     const tokenContent = { email: user.email, username: user.username };
 
+    // Create token
     const token = jwt.sign(tokenContent, JWT_SECRET as string);
+    // Set token in cookie
     res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "strict" });
 
+    // Return user profile
     const userProfile = {
       username: user.username,
       email: user.email,
@@ -74,18 +77,24 @@ export class UserResolver {
       throw new Error("No JWT secret defined in the environment");
     }
 
+    // Find user in database
     const user = await UserEntity.findOneByOrFail({ email: userData.email });
 
+    // Verify password
     const passwordIsValid = await argon.verify(user.password, userData.password);
     if (!passwordIsValid) {
       throw new Error("Invalid credentials!");
     }
 
+    // Define token content
     const tokenContent = { email: user.email, username: user.username };
 
+    // Create token
     const token = jwt.sign(tokenContent, JWT_SECRET);
+    // Set token in cookie
     res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "strict" });
 
+    // Return user profile
     const userProfile = {
       email: user.email,
       username: user.username,
