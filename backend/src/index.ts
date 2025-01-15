@@ -6,13 +6,14 @@ import { initializeDataSource } from "./config/db";
 import { AdResolver } from "./resolvers/AdResolver";
 import { CategoryResolver } from "./resolvers/CategoryResolver";
 import { TagResolver } from "./resolvers/TagResolver";
+import { UserResolver } from "./resolvers/UserResolver";
 
 const PORT = 4000;
 
 const startServer = async () => {
   await initializeDataSource();
   const schema = await buildSchema({
-    resolvers: [AdResolver, CategoryResolver, TagResolver],
+    resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
   });
   const server = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(server, {
