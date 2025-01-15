@@ -20,4 +20,8 @@ export class UserEntity extends BaseEntity {
   @Column()
   @Field()
   password!: string;
+
+  @Field()
+  @Column()
+  role!: string; // "USER" | "ADMIN"
 }
