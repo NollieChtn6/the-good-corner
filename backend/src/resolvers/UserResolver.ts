@@ -115,4 +115,12 @@ export class UserResolver {
     const users = await UserEntity.find();
     return users;
   }
+
+  // This query is protected and can only be accessed by connected users with the role 'ADMIN'
+  @Authorized("ADMIN")
+  @Query(() => [UserEntity])
+  async usersAsAdmin() {
+    const users = await UserEntity.find();
+    return users;
+  }
 }
