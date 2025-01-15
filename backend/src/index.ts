@@ -45,6 +45,8 @@ const startServer = async () => {
     listen: { port: PORT },
     context: async ({ req, res }) => {
       if (!JWT_SECRET) return { res };
+
+      // Extract token from cookie
       const token = req.headers.cookie?.split("token=")[1];
 
       if (!token) return { res };
