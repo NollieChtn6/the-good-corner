@@ -1,10 +1,10 @@
 import { Arg, Field, InputType, Mutation, Query, Resolver, ID, Ctx } from "type-graphql";
-import { In } from "typeorm";
 import { UserEntity } from "../entities/User";
 import type { Response } from "express";
 
 import * as argon from "argon2";
 import * as jwt from "jsonwebtoken";
+import e from "express";
 
 const { JWT_SECRET } = process.env;
 
@@ -42,7 +42,7 @@ export class UserResolver {
     @Arg("newUserData") newUserData: NewUserInput,
     @Ctx() { res }: { res: Response },
   ) {
-    if (!process.env.JWT_SECRET) {
+    if (!JWT_SECRET) {
       throw new Error("No JWT secret defined in the environment");
     }
 
@@ -65,6 +65,31 @@ export class UserResolver {
       email: user.email,
     };
 
+    return JSON.stringify(userProfile);
+  }
+
+  @Mutation(() => String)
+  async loginUser(@Arg("userData") userData: UserInput, @Ctx() { res }: { res: Response }) {
+    if (!JWT_SECRET) {
+      throw new Error("No JWT secret defined in the environment");
+    }
+
+    const user = await UserEntity.findOneByOrFail({ email: userData.email });
+
+    const passwordIsValid = await argon.verify(user.password, userData.password);
+    if (!passwordIsValid) {
+      throw new Error("Invalid credentials!");
+    }
+
+    const tokenContent = { email: user.email, username: user.username };
+
+    const token = jwt.sign(tokenContent, JWT_SECRET);
+    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "strict" });
+
+    const userProfile = {
+      email: user.email,
+      username: user.username,
+    };
     return JSON.stringify(userProfile);
   }
 }
