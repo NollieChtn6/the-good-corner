@@ -11,16 +11,20 @@ import { UserResolver } from "./resolvers/UserResolver";
 const PORT = 4000;
 
 const startServer = async () => {
-  await initializeDataSource();
-  const schema = await buildSchema({
-    resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
-  });
-  const server = new ApolloServer({ schema });
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: PORT },
-  });
+	await initializeDataSource();
+	const schema = await buildSchema({
+		resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
+	});
+	const server = new ApolloServer({ schema });
+	const { url } = await startStandaloneServer(server, {
+		listen: { port: PORT },
+		context: async ({ res }) => {
+			console.log("Server has received request");
+			return { res };
+		},
+	});
 
-  console.log(`Server ready at ${url}`);
+	console.log(`Server ready at ${url}`);
 };
 
 startServer();
