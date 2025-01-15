@@ -2,6 +2,8 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
+import * as jwt from "jsonwebtoken";
+
 import { initializeDataSource } from "./config/db";
 import { AdResolver } from "./resolvers/AdResolver";
 import { CategoryResolver } from "./resolvers/CategoryResolver";
@@ -9,6 +11,8 @@ import { TagResolver } from "./resolvers/TagResolver";
 import { UserResolver } from "./resolvers/UserResolver";
 
 const PORT = 4000;
+
+const { JWT_SECRET } = process.env;
 
 const startServer = async () => {
   await initializeDataSource();
@@ -39,9 +43,15 @@ const startServer = async () => {
   const server = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(server, {
     listen: { port: PORT },
-    context: async ({ res }) => {
-      // console.log("Server has received request");
-      return { res };
+    context: async ({ req, res }) => {
+      if (!JWT_SECRET) return { res };
+      const token = req.headers.cookie?.split("token=")[1];
+
+      if (!token) return { res };
+
+      const decodedToken = jwt.verify(token, JWT_SECRET);
+
+      return { res, user: decodedToken };
     },
   });
 
