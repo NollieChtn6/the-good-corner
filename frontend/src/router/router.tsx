@@ -6,6 +6,7 @@ import AllAds from "../pages/Ads";
 import { Category } from "../pages/Category";
 import CreateNewAd from "../pages/CreateNewAd";
 import LatestAds from "../pages/LatestAds";
+import { Login } from "../pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/categories/:id",
         element: <Category />,
+      },
+      {
+        path: "/connexion",
+        element: <Login />,
       },
     ],
   },
