@@ -2,8 +2,12 @@ type Query {
   ads: [AdEntity!]!
   adById(id: Float!): AdEntity!
   categories: [CategoryEntity!]!
-  categortById(id: Float!): CategoryEntity!
+  categoryById(id: Float!): CategoryEntity!
+  adsByCategory(categoryId: Float!): [AdEntity!]!
   tags: [TagEntity!]!
+  users: [UserEntity!]!
+  usersAsUser: [UserEntity!]!
+  usersAsAdmin: [UserEntity!]!
 }
 
 type AdEntity {
@@ -17,6 +21,7 @@ type AdEntity {
   createdAt: DateTimeISO!
   updatedAt: DateTimeISO
   category: CategoryEntity!
+  tags: [TagEntity!]!
 }
 
 """
@@ -36,10 +41,20 @@ type TagEntity {
   ads: [AdEntity!]!
 }
 
+type UserEntity {
+  id: Float!
+  username: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
 type Mutation {
-  createAd(ad: AdInput!): AdEntity!
+  createAd(adInput: AdInput!): AdEntity!
   deleteAd(id: Float!): String!
   replaceAdById(data: AdInput!, id: Float!): AdEntity!
+  createUser(newUserData: NewUserInput!): String!
+  loginUser(userData: UserInput!): String!
 }
 
 input AdInput {
@@ -49,5 +64,17 @@ input AdInput {
   price: Float!
   pictureUrl: String!
   location: String!
-  category: Float!
+  category: ID!
+  tags: [ID!]!
+}
+
+input NewUserInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UserInput {
+  email: String!
+  password: String!
 }
