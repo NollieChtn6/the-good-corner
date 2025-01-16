@@ -43,3 +43,8 @@ export type UpdateAdFormData = {
   category: number;
   tags: number[];
 };
+
+export type LoginFormData = {
+  email: string;
+  password: string;
+};
