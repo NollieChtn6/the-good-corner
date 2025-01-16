@@ -9,23 +9,23 @@ config();
 const { DB_HOST, DB_PASSWORD, DB_USER, DB_NAME } = process.env;
 
 const dataSource = new DataSource({
-	type: "postgres",
-	host: DB_HOST,
-	username: DB_USER,
-	password: DB_PASSWORD,
-	database: DB_NAME,
-	port: 5432,
-	entities: [AdEntity, CategoryEntity, TagEntity, UserEntity],
-	synchronize: true,
+  type: "postgres",
+  host: DB_HOST,
+  username: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  port: 5432,
+  entities: [AdEntity, CategoryEntity, TagEntity, UserEntity],
+  synchronize: true,
 });
 
 export const initializeDataSource = async () => {
-	dataSource
-		.initialize()
-		.then(() => {
-			console.log("Data Source has been initialized successfully");
-		})
-		.catch((error) => {
-			console.log("Error during Data Source initialization", error);
-		});
+  dataSource
+    .initialize()
+    .then(() => {
+      console.log("Data Source has been initialized successfully");
+    })
+    .catch((error) => {
+      console.log("Error during Data Source initialization", error);
+    });
 };
