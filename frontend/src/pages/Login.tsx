@@ -1,3 +1,9 @@
+import { LoginForm } from "../components/LoginForm";
+
 export function Login() {
-  return "This is the login page";
+  return (
+    <div className="page-content">
+      <LoginForm />
+    </div>
+  );
 }
