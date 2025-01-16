@@ -51,3 +51,10 @@ export const DELETE_AD_MUTATION = graphql(`
     deleteAd(id: $deleteAdId)
   }
   `);
+
+export const LOGIN_MUTATION = graphql(`
+  mutation LoginUser($userData: UserInput!) {
+  loginUser(userData: $userData)
+  }`);
+
+export type LoginMutationResult = ResultOf<typeof LOGIN_MUTATION>;
